@@ -317,7 +317,7 @@
         id: "balachao_150g",
         name: "চিংড়ি বালাচাও (150 গ্রাম)",
         price: 195,
-        image: "assets/prodact_1.jpg",
+        image: "assets/prodact_150.jpg",
         description: "ঝালের স্বাদ আর খাঁটি চিংড়ির অনন্য সংমিশ্রণ। ঘরে বসেই অর্ডার করুন।",
         features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"]
       },
@@ -325,7 +325,7 @@
         id: "balachao_250g",
         name: "চিংড়ি বালাচাও (250 গ্রাম)",
         price: 310,
-        image: "assets/prodact_1.jpg",
+        image: "assets/prodact_250.jpg",
         description: "বড় প্যাক, বড় স্বাদ। পরিবারের জন্য উপযুক্ত। ঘরে বসেই অর্ডার করুন।",
         features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"]
       }
@@ -413,7 +413,7 @@
       <div class="card-modern group cursor-pointer overflow-hidden animate-fade-in" data-product-id="${p.id}">
         <div class="p-0">
           <div class="relative overflow-hidden" data-action="preview">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
+            <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-secondary text-secondary-foreground text-sm px-3 py-1 rounded-md flex items-center gap-1" data-action="preview">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -454,7 +454,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div class="space-y-4">
                 <div class="relative overflow-hidden rounded-xl">
-                  <img src="${product.image}" alt="${product.name}" class="w-full h-80 object-cover hover:scale-105 transition-transform duration-500" />
+                  <img src="${product.image}" alt="${product.name}" class="w-full aspect-square object-cover hover:scale-105 transition-transform duration-500" />
                   <div class="absolute top-4 left-4"><span class="bg-success text-success-foreground text-xs px-2 py-1 rounded-md">স্টকে আছে</span></div>
                 </div>
                 <div class="flex items-center gap-2">
@@ -664,7 +664,7 @@
       }
       if (action === 'remove-item') {
         const itemId = e.target.closest('[data-item-id]').dataset.itemId;
-        CART = CART.filter(i => i.id !== itemId);
+        CART = CART.filter(i => i !== itemId);
         e.target.closest('[data-item-id]').remove();
         if (CART.length === 0) {
           openModal(renderCartModal());
