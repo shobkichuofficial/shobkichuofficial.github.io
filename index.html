@@ -97,14 +97,14 @@
             "float": {
               "0%, 100%": { transform: "translateY(0px)" },
               "50%": { transform: "translateY(-10px)" }
-            },
+            }
           },
           animation: {
             "fade-in": "fade-in 0.5s ease-out",
             "scale-in": "scale-in 0.3s ease-out",
             "slide-up": "slide-up 0.4s ease-out",
             "glow": "glow 2s ease-in-out infinite",
-            "float": "float 3s ease-in-out infinite",
+            "float": "float 3s ease-in-out infinite"
           },
         },
       },
@@ -316,12 +316,49 @@
     // --- Product Data ---
     const PRODUCTS = [
       {
+        id: "balachao_1kg",
+        name: "চিংড়ি বালাচাও (1 কেজি)",
+        price: 1099,
+        image: "assets/prodact6.jpg",
+        description: "বিশেষ অফার! ১ কেজির এই প্যাকে পাচ্ছেন ফ্রি ডেলিভারি!",
+        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ ফ্রি"],
+        freeDelivery: true
+      },
+      {
+        id: "balachao_800g",
+        name: "চিংড়ি বালাচাও (800 গ্রাম)",
+        price: 899,
+        image: "assets/prodact5.jpg",
+        description: "বিশেষ অফার! ৮০০ গ্রামের এই প্যাকে পাচ্ছেন ফ্রি ডেলিভারি!",
+        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ ফ্রি"],
+        freeDelivery: true
+      },
+      {
+        id: "balachao_500g",
+        name: "চিংড়ি বালাচাও (500 গ্রাম)",
+        price: 649,
+        image: "assets/prodact4.jpg",
+        description: "বিশেষ অফার! ৫০০ গ্রামের এই প্যাকে পাচ্ছেন ফ্রি ডেলিভারি!",
+        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ ফ্রি"],
+        freeDelivery: true
+      },
+      {
+        id: "balachao_300g",
+        name: "চিংড়ি বালাচাও (300 গ্রাম)",
+        price: 350,
+        image: "assets/prodact3.jpg",
+        description: "নতুন অফার! ৩০০ গ্রামের প্যাকে ঝালের স্বাদ আর খাঁটি চিংড়ির অনন্য সংমিশ্রণ।",
+        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ প্রযোজ্য"],
+        freeDelivery: false
+      },
+      {
         id: "balachao_150g",
         name: "চিংড়ি বালাচাও (150 গ্রাম)",
         price: 195,
         image: "assets/prodact_150.jpg",
         description: "ঝালের স্বাদ আর খাঁটি চিংড়ির অনন্য সংমিশ্রণ। ঘরে বসেই অর্ডার করুন।",
-        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"]
+        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"],
+        freeDelivery: false
       },
       {
         id: "balachao_250g",
@@ -329,7 +366,8 @@
         price: 310,
         image: "assets/prodact_250.jpg",
         description: "বড় প্যাক, বড় স্বাদ। পরিবারের জন্য উপযুক্ত। ঘরে বসেই অর্ডার করুন।",
-        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"]
+        features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"],
+        freeDelivery: false
       }
     ];
 
@@ -351,7 +389,7 @@
         "ঢাকা": ["রমনা", "মতিঝিল", "কোতোয়ালী", "সূত্রাপুর", "ধানমন্ডি", "মোহাম্মদপুর", "তেজগাঁও", "গুলশান", "লালবাগ", "মিরপুর", "পল্লবী", "সবুজবাগ", "ক্যান্টনমেন্ট", "ডেমরা", "হাজারীবাগ", "শ্যামপুর", "বাড্ডা", "কামরাঙ্গীরচর", "খিলগাঁও", "উত্তরা"],
         "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "কালীগঞ্জ", "কাপাসিয়া", "শ্রীপুর"],
         "কিশোরগঞ্জ": ["কিশোরগঞ্জ সদর", "অষ্টগ্রাম", "বাজিতপুর", "ভৈরব", "হোসেনপুর", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কুলিয়ারচর", "মিঠামইন", "নিকলী", "পাকুন্দিয়া", "তাড়াইল"],
-        "মানিকগঞ্জ": ["মানিকগঞ্জ সদর", "দৌলতপুর", "ঘিওর", "হরিরামপুর", "সাটুরিয়া", "শিবালয়", "সিঙ্গাইর"],
+        "মানিকগঞ্জ": ["মানিকগঞ্জ সদর", "দৌলتপুর", "ঘিওর", "হরিরামপুর", "সাটুরিয়া", "শিবালয়", "সিঙ্গাইর"],
         "মুন্সিগঞ্জ": ["মুন্সিগঞ্জ সদর", "গজারিয়া", "লৌহজং", "সিরাজদিখান", "শ্রীনগর", "টঙ্গিবাড়ী"],
         "নারায়ণগঞ্জ": ["নারায়ণগঞ্জ সদর", "আড়াইহাজার", "বন্দর", "রূপগঞ্জ", "সিদ্ধিরগঞ্জ", "সোনারগাঁও"],
         "নরসিংদী": ["নরসিংদী সদর", "বেলাবো", "মনোহরদী", "পলাশ", "রায়পুরা", "শিবপুর"],
@@ -506,7 +544,14 @@
           <div class="relative overflow-hidden" data-action="preview">
             <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-secondary text-secondary-foreground text-sm px-3 py-1 rounded-md flex items-center gap-1" data-action="preview">
+            
+            ${p.freeDelivery ? `
+              <div class="absolute top-4 right-4 h-20 w-20 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-center leading-tight shadow-lg animate-pulse z-10">
+                <span class="text-lg">ফ্রি<br>ডেলিভারি</span>
+              </div>
+            ` : ''}
+
+            <button class="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-secondary text-secondary-foreground text-sm px-3 py-1 rounded-md flex items-center gap-1 z-10" data-action="preview">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               দেখুন
             </button>
@@ -548,6 +593,7 @@
                 <div class="relative overflow-hidden rounded-xl">
                   <img src="${product.image}" alt="${product.name}" class="w-full aspect-square object-cover hover:scale-105 transition-transform duration-500" />
                   <div class="absolute top-4 left-4"><span class="bg-success text-success-foreground text-xs px-2 py-1 rounded-md">স্টকে আছে</span></div>
+                  ${product.freeDelivery ? `<div class="absolute top-4 right-4"><span class="bg-destructive text-destructive-foreground text-base font-extrabold px-4 py-2 rounded-lg shadow-xl animate-pulse">⚡ ফ্রি ডেলিভারি ⚡</span></div>` : ''}
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="flex items-center">
@@ -701,20 +747,34 @@
         const totalAmount = parseFloat(totalAmountText.replace('৳', ''));
 
         let itemsData;
+        let isFreeDelivery = false;
+
         if (type === 'single') {
             const quantity = parseInt(form.querySelector('#quantity-value').textContent, 10);
             itemsData = `${SELECTED_PRODUCT.name} (পরিমাণ: ${quantity})`;
-        } else {
+            isFreeDelivery = SELECTED_PRODUCT.freeDelivery || false;
+        } else { // type === 'cart'
             itemsData = CART.map(item => `${item.name} (পরিমাণ: ${item.quantity})`).join(', ');
+            isFreeDelivery = CART.length > 0 && CART.every(cartItem => {
+                const product = PRODUCTS.find(p => p.id === cartItem.id);
+                return product && product.freeDelivery;
+            });
         }
         
         const fullAddress = `${form.address.value}, থানা: ${form.thana.value}, জেলা: ${form.district.value}, বিভাগ: ${form.division.value}`;
+        
+        let deliveryLocationText = 'Not Applicable';
+        if(isFreeDelivery) {
+            deliveryLocationText = 'Free Delivery Offer';
+        } else if (form.district.value) {
+            deliveryLocationText = form.district.value === 'ঢাকা' ? 'Inside Dhaka District (70)' : 'Outside Dhaka District (130)';
+        }
         
         const orderData = {
             customerName: form.customerName.value,
             phoneNumber: form.phoneNumber.value,
             address: fullAddress,
-            deliveryLocation: form.district.value === 'ঢাকা' ? 'Inside Dhaka District (70)' : 'Outside Dhaka District (130)',
+            deliveryLocation: deliveryLocationText,
             items: itemsData,
             totalAmount: totalAmount,
         };
@@ -862,25 +922,45 @@
         if (!form) return;
         const selectedDistrict = form.querySelector('select[name="district"]').value;
         let deliveryCharge = 0;
-        if (selectedDistrict) {
-            deliveryCharge = selectedDistrict === 'ঢাকা' ? 70 : 130;
-        }
-        
         let subtotal;
+        let isFreeDelivery = false;
 
         if (type === 'single') {
             const quantity = parseInt(form.querySelector('#quantity-value').textContent, 10);
             subtotal = SELECTED_PRODUCT.price * quantity;
             form.querySelector('#product-subtotal').textContent = `সাবটোটাল: ৳${subtotal}`;
-        } else {
+            if (SELECTED_PRODUCT.freeDelivery) {
+                isFreeDelivery = true;
+            }
+        } else { // type === 'cart'
             subtotal = CART.reduce((sum, item) => sum + item.price * item.quantity, 0);
             form.querySelector('#cart-subtotal').textContent = `৳${subtotal}`;
+            const allItemsFreeDelivery = CART.every(cartItem => {
+                const product = PRODUCTS.find(p => p.id === cartItem.id);
+                return product && product.freeDelivery;
+            });
+            if (CART.length > 0 && allItemsFreeDelivery) {
+                isFreeDelivery = true;
+            }
+        }
+        
+        if (selectedDistrict && !isFreeDelivery) {
+            deliveryCharge = selectedDistrict === 'ঢাকা' ? 70 : 130;
         }
         
         const total = subtotal + deliveryCharge;
-        form.querySelector('#delivery-charge').textContent = `৳${deliveryCharge}`;
+        const deliveryChargeEl = form.querySelector('#delivery-charge');
+
+        if (isFreeDelivery) {
+            deliveryChargeEl.textContent = 'ফ্রি';
+            deliveryChargeEl.classList.add('text-success', 'font-bold');
+        } else {
+            deliveryChargeEl.textContent = `৳${deliveryCharge}`;
+            deliveryChargeEl.classList.remove('text-success', 'font-bold');
+        }
+        
         form.querySelector('#total-amount').textContent = `৳${total}`;
-        form.querySelector('#delivery-charge-row').style.display = deliveryCharge > 0 || selectedDistrict ? 'flex' : 'none';
+        form.querySelector('#delivery-charge-row').style.display = selectedDistrict || isFreeDelivery ? 'flex' : 'none';
     }
 
     // --- THEME ---
