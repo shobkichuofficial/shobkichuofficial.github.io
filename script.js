@@ -476,7 +476,21 @@ function initializeCheckoutPage() {
         const total = subtotal + deliveryCharge;
         orderSummaryEl.innerHTML = `
             <h3 class="text-2xl font-bold text-gradient mb-6">অর্ডার সারাংশ</h3>
-            <div class="space-y-4 mb-6">${items.map(item => `...`).join('')}</div>
+            <div class="space-y-4 mb-6">
+                ${items.map(item => `
+                    <div class="flex items-center gap-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover border border-border">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground">${item.name}</h4>
+                            <p class="text-sm text-muted-foreground">পরিমাণ: ${item.quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-semibold text-foreground">৳${item.price * item.quantity}</span>
+                            <button onclick="removeFromCart('${item.id}')" class="text-xs text-destructive hover:underline ml-2">মুছুন</button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
             <div class="space-y-3 pt-4 border-t border-border">
                 <div class="flex justify-between text-muted-foreground"><span>সাব-টোটাল</span><span class="font-medium">৳${subtotal}</span></div>
                 <div class="flex justify-between text-muted-foreground"><span>ডেলিভারি চার্জ</span><span class="font-medium">${deliveryCharge === 0 ? (isFreeDeliveryApplicable ? 'ফ্রি' : 'জেলা নির্বাচন করুন') : `৳${deliveryCharge}`}</span></div>
@@ -532,7 +546,15 @@ function initializeCheckoutPage() {
         const fullAddress = `${checkoutForm.address.value}, থানা: ${checkoutForm.thana.value}, জেলা: ${checkoutForm.district.value}, বিভাগ: ${checkoutForm.division.value}`;
         
         const orderDetailsForConfirmation = { customerName: checkoutForm.customerName.value, phoneNumber: checkoutForm.phoneNumber.value, fullAddress, items, subtotal, deliveryCharge, total };
-        const success = await submitToGoogleSheet({ ...orderDetailsForConfirmation, deliveryLocation: checkoutForm.district.value, items: items.map(item => `${item.name} (x${item.quantity})`).join(', '), totalAmount: total });
+        
+        const success = await submitToGoogleSheet({
+            customerName: checkoutForm.customerName.value,
+            phoneNumber: checkoutForm.phoneNumber.value,
+            address: fullAddress,
+            deliveryLocation: checkoutForm.district.value,
+            items: items.map(item => `${item.name} (x${item.quantity})`).join(', '),
+            totalAmount: total
+        });
         
         if (success) {
             localStorage.setItem('shobkichuOrderConfirmation', JSON.stringify(orderDetailsForConfirmation));
