@@ -82,8 +82,17 @@
             <span class="inline-block bg-secondary text-secondary-foreground mb-4 px-6 py-2 text-lg rounded-lg">💬 গ্রাহক রিভিউ 💬</span>
             <h2 class="text-4xl font-bold text-gradient">আমাদের গ্রাহকরা যা বলেন</h2>
           </div>
-          <div id="review-grid-full" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <div class="max-w-xs mx-auto mb-10">
+              <label for="review-sort" class="sr-only">রিভিউ সাজান</label>
+              <select id="review-sort" class="w-full p-2 border rounded-md bg-input focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                  <option value="most_recent">সাম্প্রতিকতম</option>
+                  <option value="highest_rating">সর্বোচ্চ রেটিং</option>
+              </select>
           </div>
+
+          <div id="review-grid-full" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+             </div>
         </div>
       </section>
 </main>

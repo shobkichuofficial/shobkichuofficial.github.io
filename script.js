@@ -7,13 +7,22 @@ const SHIPPING_CHARGES = {
 
 // --- Product Data ---
 const PRODUCTS = [
+  // Existing Balachao Products
   { id: "balachao_1kg", name: "চিংড়ি বালাচাও (1 kg)", name_en: "Chingri Balachao (1 kg)", weight: "1kg", price: 1099, image: "assets/prodact6.jpg", description: "বিশেষ অফার! 1 কেজির এই প্যাকে পাচ্ছেন ফ্রি ডেলিভারি!", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ ফ্রি"], freeDelivery: true, stock: 50, rating: 5 },
   { id: "balachao_800g", name: "চিংড়ি বালাচাও (800 g)", name_en: "Chingri Balachao (800 gram)", weight: "800g", price: 899, image: "assets/prodact5.jpg", description: "বিশেষ অফার! 800 গ্রামের এই প্যাকে পাচ্ছেন ফ্রি ডেলিভারি!", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ ফ্রি"], freeDelivery: true, stock: 50, rating: 5 },
   { id: "balachao_500g", name: "চিংড়ি বালাচাও (500 g)", name_en: "Chingri Balachao (500 gram)", weight: "500g", price: 649, image: "assets/prodact4.jpg", description: "বিশেষ অফার! 500 গ্রামের এই প্যাকে পাচ্ছেন ফ্রি ডেলিভারি!", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ ফ্রি"], freeDelivery: true, stock: 50, rating: 5 },
-  { id: "balachao_300g", name: "চিংড়ি বালাচাও (300 g)", name_en: "Chingri Balachao (300 gram)", weight: "300g", price: 350, image: "assets/prodact3.jpg", description: "নতুন অফার! 300 গ্রামের প্যাকে ঝালের স্বাদ আর খাঁটি চিংড়ির অনন্য সংমিশ্রণ।", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ প্রযোজ্য"], freeDelivery: false, stock: 50, rating: 4 },
+  { id: "balachao_300g", name: "চিংড়ি বালাচাও (300 g)", name_en: "Chingri Balachao (300 gram)", weight: "300g", price: 350, image: "assets/prodact3.jpg", description: "ঝালের স্বাদ আর খাঁটি চিংড়ির অনন্য সংমিশ্রণ। ঘরে বসেই অর্ডার করুন।", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "ডেলিভারি চার্জ প্রযোজ্য"], freeDelivery: false, stock: 50, rating: 4 },
   { id: "balachao_250g", name: "চিংড়ি বালাচাও (250 g)", name_en: "Chingri Balachao (250 gram)", weight: "250g", price: 310, image: "assets/prodact_250.jpg", description: "বড় প্যাক, বড় স্বাদ। পরিবারের জন্য উপযুক্ত। ঘরে বসেই অর্ডার করুন।", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"], freeDelivery: false, stock: 50, rating: 5 },
-  { id: "balachao_150g", name: "চিংড়ি বালাচাও (150 g)", name_en: "Chingri Balachao (150 gram)", weight: "150g", price: 195, image: "assets/prodact_150.jpg", description: "ঝালের স্বাদ আর খাঁটি চিংড়ির অনন্য সংমিশ্রণ। ঘরে বসেই অর্ডার করুন।", features: ["ফ্রেশ ড্রাই চিংড়ি", "আসল মসলা", "ঝাঁজালো স্বাদ", "হোমমেড ফ্লেভার", "উন্নতমানের উপাদান"], freeDelivery: false, stock: 100, rating: 4 }
+  
+  // New Achar Products
+  { id: "achar_morich", name: "মরিচের আচার (500 g)", name_en: "Chili Pickle (500 gram)", weight: "500g", price: 480, image: "assets/achar_morich.jpg", description: "ঝালপ্রিয়দের জন্য স্পেশাল মরিচের আচার।", features: ["তাজা কাঁচামরিচ", "সরিষার তেল", "বিশুদ্ধ মসলা", "সম্পূর্ণ ঘরোয়া"], freeDelivery: false, stock: 30, rating: 5 },
+  { id: "achar_rosun", name: "রসুনের আচার (450 g)", name_en: "Garlic Pickle (450 gram)", weight: "450g", price: 480, image: "assets/achar_rosun.jpg", description: "স্বাস্থ্যকর ও সুস্বাদু রসুনের আচার।", features: ["আস্ত রসুনের কোয়া", "সরিষার তেল", "বিশেষ মসলা", "হজমে সহায়ক"], freeDelivery: false, stock: 30, rating: 5 },
+  { id: "achar_aam", name: "আমের আচার (450 g)", name_en: "Mango Pickle (450 gram)", weight: "450g", price: 480, image: "assets/achar_aam.jpg", description: "টক-ঝাল-মিষ্টি স্বাদের ঐতিহ্যবাহী আমের আচার।", features: ["কাঁচা আমের টুকরো", "বিশুদ্ধ সরিষার তেল", "পাঁচফোড়ন", "ঐতিহ্যবাহী স্বাদ"], freeDelivery: false, stock: 30, rating: 5 },
+  { id: "achar_jolpai", name: "জলপাইয়ের আচার (450 g)", name_en: "Olive Pickle (450 gram)", weight: "450g", price: 480, image: "assets/achar_jolpai.jpg", description: "জিভে জল আনা টক-ঝাল জলপাইয়ের আচার।", features: ["তাজা জলপাই", "সরিষার তেল", "আখरोট ও মসলা", "দারুণ স্বাদ"], freeDelivery: false, stock: 30, rating: 5 },
+  { id: "achar_mixed", name: "মিক্সড আচার (450 g)", name_en: "Mixed Pickle (450 gram)", weight: "450g", price: 480, image: "assets/achar_mixed.jpg", description: "আম, জলপাই, রসুন ও মরিচের সমন্বয়ে তৈরি বিশেষ মিক্সড আচার।", features: ["বিভিন্ন ফলের মিশ্রণ", "সরিষার তেল", "সিক্রেট রেসিপি", "অনন্য স্বাদ"], freeDelivery: false, stock: 30, rating: 5 }
 ];
+
+const ACHAR_PRODUCTS = PRODUCTS.filter(p => p.id.startsWith("achar_"));
 
 // --- Review Data ---
 const REVIEWS = [
@@ -21,18 +30,13 @@ const REVIEWS = [
     { name: "ইমরান খান", rating: 5, text: "অর্ডার করার ২ দিনের মধ্যেই ডেলিভারি পেয়েছি। প্যাকেজিংও খুব ভালো ছিল। ধন্যবাদ সবকিছু.com।", date: "2024-09-14" },
     { name: "সাকিব রহমান", rating: 5, text: "ফ্রি ডেলিভারি অফারটা দারুণ ছিল। স্বাদ আর সার্ভিসে আমি মুগ্ধ। বন্ধুদেরও রিকমেন্ড করেছি।", date: "2024-09-12" },
     { name: "সুমন আহমেদ", rating: 4, text: "চিংড়ির পরিমাণ আর মসলার মিশ্রণটা পারফেক্ট। গরম ভাতের সাথে অসাধারণ লাগে।", date: "2024-09-11" },
-    { name: "জান্নাতুল ফেরদৌস", rating: 5, text: "অনেকদিন ধরেই ভালো মানের বালাচাও খুঁজছিলাম। সবকিছু.com আমার প্রত্যাশা পূরণ করেছে।", date: "2024-09-10" },
-    { name: "রাকিবুল ইসলাম", rating: 4, text: "প্যাকেজিং খুবই সুন্দর এবং নিরাপদ ছিল। পণ্যের মান নিয়ে কোনো অভিযোগ নেই।", date: "2024-09-09" },
-    { name: "তাসনিয়া চৌধুরী", rating: 5, text: "দ্বিতীয়বার অর্ডার করলাম। প্রতিবারই একই রকম দারুণ স্বাদ পেয়েছি। ধন্যবাদ।", date: "2024-09-08" },
-    { name: "মেহেদী হাসান", rating: 5, text: "আমার পুরো পরিবার বালাচাও-এর ফ্যান হয়ে গেছে। বিশেষ করে ঝালটা আমার খুব পছন্দ।", date: "2024-09-07" },
-    { name: "আয়েশা সিদ্দিকা", rating: 3, text: "হোমমেড খাবারের আসল স্বাদ পেলাম। তবে ডেলিভারি আরেকটু দ্রুত হলে ভালো হতো।", date: "2024-09-05" },
-    { name: "নাজমুল হক", rating: 5, text: "সাশ্রয়ী মূল্যে এত ভালো মানের পণ্য দেওয়ার জন্য সবকিছু.com-কে ধন্যবাদ।", date: "2024-09-02" }
+    { name: "জান্নাতুল ফেরদৌস", rating: 5, text: "অনেকদিন ধরেই ভালো মানের বালাচাও খুঁজছিলাম। সবকিছু.com আমার প্রত্যাশা পূরণ করেছে।", date: "2024-09-10" }
 ];
 
 
 // --- Bangladesh Divisions and Districts Data ---
 const DIVISIONS_AND_DISTRICTS = { "ঢাকা": ["ঢাকা", "গাজীপুর", "কিশোরগঞ্জ", "মানিকগঞ্জ", "মুন্সিগঞ্জ", "নারায়ণগঞ্জ", "নরসিংদী", "টাঙ্গাইল", "ফরিদপুর", "গোপালগঞ্জ", "মাদারীপুর", "রাজবাড়ী", "শরীয়তপুর"], "চট্টগ্রাম": ["বান্দরবান", "ব্রাহ্মণবাড়িয়া", "চাঁদপুর", "চট্টগ্রাম", "কুমিল্লা", "কক্সবাজার", "ফেনী", "খাগড়াছড়ি", "লক্ষ্মীপুর", "নোয়াখালী", "রাঙ্গামাটি"], "খুলনা": ["বাগেরহাট", "চুয়াডাঙ্গা", "যশোর", "ঝিনাইদহ", "খুলনা", "কুষ্টিয়া", "মাগুরা", "মেহেরপুর", "নড়াইল", "সাতক্ষীরা"], "রাজশাহী": ["বগুড়া", "চাঁপাইনবাবগঞ্জ", "জয়পুরহাট", "নওগাঁ", "নাটোর", "পাবনা", "রাজশাহী", "সিরাজগঞ্জ"], "বরিশাল": ["বরগুনা", "বরিশাল", "ভোলা", "ঝালকাঠি", "পটুয়াখালী", "পিরোজপুর"], "সিলেট": ["হবিগঞ্জ", "মৌলভীবাজার", "সুনামগঞ্জ", "সিলেট"], "রংপুর": ["দিনাজপুর", "গাইবান্ধা", "কুড়িগ্রাম", "লালমনিরহাট", "নীলফামারী", "পঞ্চগড়", "রংপুর", "ঠাকুরগাঁও"], "ময়মনসিংহ": ["জামালপুর", "ময়মনসিংহ", "নেত্রকোনা", "শেরপুর"] };
-const DISTRICTS_AND_THANAS = { "ঢাকা": ["রমনা", "মতিঝিল", "কোতোয়ালী", "সূত্রাপুর", "ধানমন্ডি", "মোহাম্মদপুর", "তেজগাঁও", "গুলশান", "লালবাগ", "মিরপুর", "পল্লবী", "সবুজবাগ", "ক্যান্টনমেন্ট", "ডেমরা", "হাজারীবাগ", "শ্যামপুর", "বাড্ডা", "কামরাঙ্গীরচর", "খিলগাঁও", "উত্তরা"], "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "কালীগঞ্জ", "কাপাসিয়া", "শ্রীপুর"], "কিশোরগঞ্জ": ["কিশোরগঞ্জ সদর", "অষ্টগ্রাম", "বাজিতপুর", "ভৈরব", "হোসেনপুর", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কুলিয়ারচর", "মিঠামইন", "নিকলী", "পাকুন্দিয়া", "তাড়াইল"], "মানিকগঞ্জ": ["মানিকগঞ্জ সদর", "দৌলতপুর", "ঘিওর", "হরিরামপুর", "সাটুরিয়া", "শিবালয়", "সিঙ্গাইর"], "মুন্সিগঞ্জ": ["মুন্সিগঞ্জ সদর", "গজারিয়া", "লৌহজং", "সিরাজদিখান", "শ্রীনগর", "টঙ্গিবাড়ী"], "নারায়ণগঞ্জ": ["নারায়ণগঞ্জ সদর", "আড়াইহাজার", "বন্দর", "রূপগঞ্জ", "সিদ্ধিরগঞ্জ", "সোনারগাঁও"], "নরসিংদী": ["নরসিংদী সদর", "বেলাবো", "মনোহরদী", "পলাশ", "রায়পুরা", "শিবপুর"], "টাঙ্গাইল": ["টাঙ্গাইল সদর", "বাসাইল", "ভুঞাপুর", "দেলদুয়ার", "ঘাটাইল", "গোপালপুর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "নাগরপুর", "সখিপুর", "ধনবাড়ী"], "ফরিদপুর": ["ফরিদপুর সদর", "আলফাডাঙ্গা", "ভাঙ্গা", "বোয়ালমারী", "চরভদ্রাসন", "মধুখালী", "নগরকান্দা", "সদরপুর", "সালথা"], "গোপালগঞ্জ": ["গোপালগঞ্জ সদর", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর", "টুঙ্গিপাড়া"], "মাদারীপুর": ["মাদারীপুর সদর", "কালকিনি", "রাজৈর", "শিবচর"], "রাজবাড়ী": ["রাজবাড়ী সদর", "বালিয়াকান্দি", "গোয়ালন্দ", "পাংশা", "কালুখালী"], "শরীয়তপুর": ["শরীয়তপুর সদর", "ভেদরগঞ্জ", "ডামুড্যা", "গোসাইরহাট", "নড়িয়া", "জাজিরা"], "বান্দরবান": ["বান্দরবান সদর", "আলীকদম", "লামা", "নাইক্ষ্যংছড়ি", "রোয়াংছড়ি", "রুমা", "থানচি"], "ব্রাহ্মণবাড়িয়া": ["ব্রাহ্মণবাড়িয়া সদর", "আখাউড়া", "আশুগঞ্জ", "বাঞ্ছারামপুর", "কসবা", "নবীনগর", "নাসিরনগর", "সরাইল", "বিজয়নগর"], "চাঁদপুর": ["চাঁদপুর সদর", "ফরিদগঞ্জ", "হাইমচর", "হাজীগঞ্জ", "কচুয়া", "মতলব উত্তর", "মতলব দক্ষিণ", "শাহরাস্তি"], "চট্টগ্রাম": ["আনোয়ারা", "বাঁশখালী", "বোয়ালখালী", "চন্দনাইশ", "ফটিকছড়ি", "হাটহাজারী", "কর্ণফুলী", "লোহাগড়া", "মীরসরাই", "পটিয়া", "রাঙ্গুনিয়া", "রাউজান", "সন্দ্বীপ", "সাতকানিয়া", "সীতাকুণ্ড"], "কুমিল্লা": ["কুমিল্লা সদর", "বরুড়া", "ব্রাহ্মণপাড়া", "বুড়িচং", "চান্দিনা", "চৌদ্দগ্রাম", "দাউদকান্দি", "দেবীদ্বার", "হোমনা", "লাকসাম", "মনোহরগঞ্জ", "মেঘনা", "মুরাদনগর", "নাঙ্গলকোট", "তিতাস"], "কক্সবাজার": ["কক্সবাজার সদর", "চকরিয়া", "কুতুবদিয়া", "মহেশখালী", "পেকুয়া", "রামু", "টেকনাফ", "উখিয়া"], "ফেনী": ["ফেনী সদর", "ছাগলনাইয়া", "দাগনভূঞা", "পরশুরাম", "সোনাগাজী", "ফুলগাজী"], "খাগড়াছড়ি": ["খাগড়াছড়ি সদর", "দীঘিনালা", "লক্ষ্মীছড়ি", "মহালছড়ি", "মানিকছড়ি", "মাটিরাঙ্গা", "পানছড়ি", "রামগড়"], "লক্ষ্মীপুর": ["লক্ষ্মীপুর সদর", "কমলনগর", "রায়পুর", "রামগঞ্জ", "রামগতি"], "নোয়াখালী": ["নোয়াখালী সদর", "বেগমগঞ্জ", "চাটখিল", "কোম্পানীগঞ্জ", "হাতিয়া", "সেনবাগ", "সুবর্ণচর", "কবিরহাট"], "রাঙ্গামাটি": ["রাঙ্গামাটি সদর", "বাঘাইছড়ি", "বরকল", "কাপ্তাই", "জুরাছড়ি", "লংগদু", "নানিয়ারচর", "রাজস্থলী", "বিলাইছড়ি", "কাউনখালী"], "বাগেরহাট": ["বাগেরহাট সদর", "চিতলমারী", "ফকিরহাট", "কচুয়া", "মোল্লাহাট", "মোংলা", "মোরেলগঞ্জ", "রামপাল", "শরণখোলা"], "চুয়াডাঙ্গা": ["চুয়াডাঙ্গা সদর", "আলমডাঙ্গা", "দামুড়হুদা", "জীবননগর"], "যশোর": ["যশোর সদর", "অভয়নগর", "বাঘারপাড়া", "চৌগাছা", "ঝিকরগাছা", "কেশবপুর", "মণিরামপুর", "শার্শা"], "ঝিনাইদহ": ["ঝিনাইদহ সদর", "হরিণাকুণ্ডু", "কালীগঞ্জ", "কোটচাঁদপুর", "মহেশপুর", "শৈলকুপা"], "খুলনা": ["ডুমুরিয়া", "বটিয়াঘাটা", "দাকোপ", "দিঘলিয়া", "কয়রা", "পাইকগাছা", "ফুলতলা", "রূপসা", "তেরখাদা"], "কুষ্টিয়া": ["কুষ্টিয়া সদর", "ভেড়ামারা", "দৌলতপুর", "কুমারখালী", "খোকসা", "মিরপুর"], "মাগুরা": ["মাগুরা সদর", "মহম্মদপুর", "শালিখা", "শ্রীপুর"], "মেহেরপুর": ["মেহেরপুর সদর", "গাংনী", "মুজিবনগর"], "নড়াইল": ["নড়াইল সদর", "কালিয়া", "লোহাগড়া"], "সাতক্ষীরা": ["সাতক্ষীরা সদর", "কলারোয়া", "আশাশুনি", "দেবহাটা", "কালিগঞ্জ", "শ্যামনগর", "তালা"], "বগুড়া": ["বগুড়া সদর", "আদমদীঘি", "ধুনট", "দুপচাঁচিয়া", "গাবতলী", "কাহালু", "নন্দীগ্রাম", "সারিয়াকান্দি", "שাজাহানপুর", "শেরপুর", "শিবগঞ্জ", "সোনাতলা"], "চাঁপাইনবাবগঞ্জ": ["চাঁপাইনবাবগঞ্জ সদর", "গোমস্তাপুর", "নাচোল", "ভোলাহাট", "শিবগঞ্জ"], "জয়পুরহাট": ["জয়পুরহাট সদর", "আক্কেলপুর", "কালাই", "ক্ষেতলাল", "পাঁচবিবি"], "নওগাঁ": ["নওগাঁ সদর", "আত্রাই", "বদলগাছী", "ধামইরহাট", "মান্দা", "মহাদেবপুর", "নিয়ামতপুর", "পত্নীতলা", "পোরশা", "রানীনগর", "সাপাহার"], "নাটোর": ["নাটোর সদর", "বাগাতিপাড়া", "বড়াইগ্রাম", "গুরুদাসপুর", "লালপুর", "সিংড়া", "নলডাঙ্গা"], "পাবনা": ["পাবনা সদর", "ঈশ্বরদী", "আটঘরিয়া", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর", "সাঁথিয়া", "সুজানগর"], "রাজশাহী": ["বাঘা", "বাগমারা", "চারঘাট", "দুর্গাপুর", "গোদাগাড়ী", "মোহনপুর", "পবা", "পুঠিয়া", "তানোর"], "সিরাজগঞ্জ": ["সিরাজগঞ্জ সদর", "বেলকুচি", "চৌহালী", "কামারখন্দ", "কাজীপুর", "রায়গঞ্জ", "শাহজাদপুর", "তাড়াশ", "উল্লাপাড়া"], "বরগুনা": ["বরগুনা সদর", "আমতলী", "বামনা", "বেতাগী", "পাথরঘাটা", "তালতলী"], "বরিশাল": ["বরিশাল সদর", "আগৈলঝাড়া", "বাবুগঞ্জ", "বানারীপাড়া", "গৌরনদী", "হিজলা", "মেহেন্দিগঞ্জ", "মুলাদী", "উজিরপুর", "বাকেরগঞ্জ"], "ভোলা": ["ভোলা সদর", "বোরহানউদ্দিন", "চরফ্যাশন", "দৌলতখান", "লালমোহন", "মনপুরা", "তজুমদ্দিন"], "ঝালকাঠি": ["ঝালকাঠি সদর", "কাঁঠালিয়া", "নলছিটি", "রাজাপুর"], "পটুয়াখালী": ["পটুয়াখালী সদর", "বাউফল", "দশমিনা", "গলাচিপা", "কলাপাড়া", "মির্জাগঞ্জ", "দুমকি", "রাঙ্গাবালী"], "পিরোজপুর": ["পিরোজপুর সদর", "ভান্ডারিয়া", "কাউখালী", "মঠবাড়িয়া", "নাজিরপুর", "নেসারেবাদ (স্বরূপকাঠি)", "ইন্দুরকানী"], "সিলেট": ["সিলেট সদর", "বালাগঞ্জ", "বিয়ানীবাজার", "কোম্পানীগঞ্জ", "ফেঞ্চুগঞ্জ", "গোলাপগঞ্জ", "গোয়াইনঘাট", "জৈন্তাপুর", "কানাইঘাট", "দক্ষিণ সুরমা", "জকিগঞ্জ", "ওসমানী নগর"], "হবিগঞ্জ": ["হবিগঞ্জ সদর", "আজমিরীগঞ্জ", "বানিয়াচং", "বাহুবল", "চুনারুঘাট", "লাখাই", "মাধবপুর", "নবীগঞ্জ"], "মৌলভীবাজার": ["মৌলভীবাজার সদর", "বড়লেখা", "জুড়ী", "কমলগঞ্জ", "কুলাউড়া", "রাজনগর", "শ্রীমঙ্গল"], "সুনামগঞ্জ": ["সুনামগঞ্জ সদর", "বিশ্বম্ভরপুর", "ছাতক", "দিরাই", "ধর্মপাশা", "দোয়ারাবাজার", "জগন্নাথপুর", "জামালগঞ্জ", "শাল্লা", "তাহিরপুর", "দক্ষিণ সুনামগঞ্জ"], "দিনাজপুর": ["দিনাজপুর সদর", "বিরামপুর", "বীরগঞ্জ", "বিরল", "বোচাগঞ্জ", "চিরিরবন্দর", "ফুলবাড়ী", "ঘোড়াঘাট", "হাকিমপুর", "কাহারোল", "খানসামা", "নবাবগঞ্জ", "পার্বতীপুর"], "গাইবান্ধা": ["গাইবান্ধা সদর", "ফুলছড়ি", "গোবিন্দগঞ্জ", "পলাশবাড়ী", "সাদুল্লাপুর", "সাঘাটা", "সুন্দরগঞ্জ"], "কুড়িগ্রাম": ["কুড়িগ্রাম সদর", "ভূরুঙ্গামারী", "চর রাজিবপুর", "চিলমারী", "ফুলবাড়ী", "নাগেশ্বরী", "রাজারহাট", "রৌমারী", "উলিপুর"], "লালমনিরহাট": ["লালমনিরহাট সদর", "আদিতমারী", "হাতীবান্ধা", "কালীগঞ্জ", "পাটগ্রাম"], "নীলফামারী": ["নীলফামারী সদর", "ডোমার", "ডিমলা", "জলঢাকা", "কিশোরগঞ্জ", "সৈয়দপুর"], "পঞ্চগড়": ["পঞ্চগড় সদর", "আটোয়ারী", "বোদা", "দেবীগঞ্জ", "তেঁতুলিয়া"], "রংপুর": ["রংপুর সদর", "বদরগঞ্জ", "গঙ্গাচড়া", "কাউনিয়া", "মিঠাপুকুর", "পীরগাছা", "পীরগঞ্জ", "তারাগঞ্জ"], "ঠাকুরগাঁও": ["ঠাকুরগাঁও সদর", "বালিয়াডাঙ্গী", "হরিপুর", "পীরগঞ্জ", "রানীশংকৈল"], "জামালপুর": ["জামালপুর সদর", "বকশীগঞ্জ", "দেওয়ানগঞ্জ", "ইসলামপুর", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"], "ময়মনসিংহ": ["ময়মনসিংহ সদর", "ভালুকা", "ধোবাউড়া", "ফুলবাড়ীয়া", "গফরগাঁও", "গৌরীপুর", "হালুয়াঘাট", "ঈশ্বরগঞ্জ", "মুক্তাগাছা", "নান্দাইল", "ফুলপুর", "তারাকান্দা", "ত্রিশাল"], "নেত্রকোনা": ["নেত্রকোনা সদর", "বারহাট্টা", "দুর্গাপুর", "কেন্দুয়া", "কলমাকান্দা", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "খালিয়াজুরী", "আটপাড়া"], "শেরপুর": ["শেরপুর সদর", "ঝিনাইগাতী", "নকলা", "নালিতাবাড়ী", "শ্রীবরদী"] };
+const DISTRICTS_AND_THANAS = { "ঢাকা": ["রমনা", "মতিঝিল", "কোতোয়ালী", "সূত্রাপুর", "ধানমন্ডি", "মোহাম্মদপুর", "তেজগাঁও", "গুলশান", "লালবাগ", "মিরপুর", "পল্লবী", "সবুজবাগ", "ক্যান্টনমেন্ট", "ডেমরা", "হাজারীবাগ", "শ্যামপুর", "বাড্ডা", "কামরাঙ্গীরচর", "খিলগাঁও", "উত্তরা"], "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "কালীগঞ্জ", "কাপাসিয়া", "শ্রীপুর"], "কিশোরগঞ্জ": ["কিশোরগঞ্জ সদর", "অষ্টগ্রাম", "বাজিতপুর", "ভৈরব", "হোসেনপুর", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কুলিয়ারচর", "মিঠামইন", "নিকলী", "পাকুন্দিয়া", "তাড়াইল"], "মানিকগঞ্জ": ["মানিকগঞ্জ সদর", "দৌলতপুর", "ঘিওর", "হরিরামপুর", "সাটুরিয়া", "শিবালয়", "সিঙ্গাইর"], "মুন্সিগঞ্জ": ["মুন্সিগঞ্জ সদর", "গজারিয়া", "লৌহজং", "সিরাজদিখান", "শ্রীনগর", "টঙ্গিবাড়ী"], "নারায়ণগঞ্জ": ["নারায়ণগঞ্জ সদর", "আড়াইহাজার", "বন্দর", "রূপগঞ্জ", "সিদ্ধিরগঞ্জ", "সোনারগাঁও"], "নরসিংদী": ["নরসিংদী সদর", "বেলাবো", "মনোহরদী", "পলাশ", "রায়পুরা", "শিবপুর"], "টাঙ্গাইল": ["টাঙ্গাইল সদর", "বাসাইল", "ভুঞাপুর", "দেলদুয়ার", "ঘাটাইল", "গোপালপুর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "নাগরপুর", "সখিপুর", "ধনবাড়ী"], "ফরিদপুর": ["ফরিদপুর সদর", "আলফাডাঙ্গা", "ভাঙ্গা", "বোয়ালমারী", "চরভদ্রাসন", "মধুখালী", "নগরকান্দা", "সদরপুর", "সালথা"], "গোপালগঞ্জ": ["গোপালগঞ্জ সদর", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর", "টুঙ্গিপাড়া"], "মাদারীপুর": ["মাদারীপুর সদর", "কালকিনি", "রাজৈর", "শিবচর"], "রাজবাড়ী": ["রাজবাড়ী সদর", "বালিয়াকান্দি", "গোয়ালন্দ", "পাংশা", "কালুখালী"], "শরীয়তপুর": ["শরীয়তপুর সদর", "ভেদরগঞ্জ", "ডামুড্যা", "গোসাইরহাট", "নড়িয়া", "জাজিরা"], "বান্দরবান": ["বান্দরবান সদর", "আলীকদম", "লামা", "নাইক্ষ্যংছড়ি", "রোয়াংছড়ি", "রুমা", "থানচি"], "ব্রাহ্মণবাড়িয়া": ["ব্রাহ্মণবাড়িয়া সদর", "আখাউড়া", "আশুগঞ্জ", "বাঞ্ছারামপুর", "কসবা", "নবীনগর", "নাসিরনগর", "সরাইল", "বিজয়নগর"], "চাঁদপুর": ["চাঁদপুর সদর", "ফরিদগঞ্জ", "হাইমচর", "হাজীগঞ্জ", "কচুয়া", "মতলব উত্তর", "মতলব দক্ষিণ", "শাহরাস্তি"], "চট্টগ্রাম": ["আনোয়ারা", "বাঁশখালী", "বোয়ালখালী", "চন্দনাইש", "ফটিকছড়ি", "হাটহাজারী", "কর্ণফুলী", "লোহাগড়া", "মীরসরাই", "পটিয়া", "রাঙ্গুনিয়া", "রাউজান", "সন্দ্বীপ", "সাতকানিয়া", "সীতাকুণ্ড"], "কুমিল্লা": ["কুমিল্লা সদর", "বরুড়া", "ব্রাহ্মণপাড়া", "বুড়িচং", "চান্দিনা", "চৌদ্দগ্রাম", "দাউদকান্দি", "দেবীদ্বার", "হোমনা", "লাকসাম", "মনোহরগঞ্জ", "মেঘনা", "মুরাদনগর", "নাঙ্গলকোট", "তিতাস"], "কক্সবাজার": ["কক্সবাজার সদর", "চকরিয়া", "কুতুবদিয়া", "মহেশখালী", "পেকুয়া", "রামু", "টেকনাফ", "উখিয়া"], "ফেনী": ["ফেনী সদর", "ছাগলনাইয়া", "দাগনভূঞা", "পরশুরাম", "সোনাগাজী", "ফুলগাজী"], "খাগড়াছড়ি": ["খাগড়াছড়ি সদর", "দীঘিনালা", "লক্ষ্মীছড়ি", "মহালছড়ি", "মানিকছড়ি", "মাটিরাঙ্গা", "পানছড়ি", "রামগড়"], "লক্ষ্মীপুর": ["লক্ষ্মীপুর সদর", "কমলনগর", "রায়পুর", "রামগঞ্জ", "রামগতি"], "নোয়াখালী": ["নোয়াখালী সদর", "বেগমগঞ্জ", "চাটখিল", "কোম্পানীগঞ্জ", "হাতিয়া", "সেনবাগ", "সুবর্ণচর", "কবিরহাট"], "রাঙ্গামাটি": ["রাঙ্গামাটি সদর", "বাঘাইছড়ি", "বরকল", "কাপ্তাই", "জুরাছড়ি", "লংগদু", "নানিয়ারচর", "রাজস্থলী", "বিলাইছড়ি", "কাউনখালী"], "বাগেরহাট": ["বাগেরহাট সদর", "চিতলমারী", "ফকিরহাট", "কচুয়া", "মোল্লাহাট", "মোংলা", "মোরেলগঞ্জ", "রামপাল", "শরণখোলা"], "চুয়াডাঙ্গা": ["চুয়াডাঙ্গা সদর", "আলমডাঙ্গা", "দামুড়হুদা", "জীবননগর"], "যশোর": ["যশোর সদর", "অভয়নগর", "বাঘারপাড়া", "চৌগাছা", "ঝিকরগাছা", "কেশবপুর", "মণিরামপুর", "শার্শা"], "ঝিনাইদহ": ["ঝিনাইদহ সদর", "হরিণাকুণ্ডু", "কালীগঞ্জ", "কোটচাঁদপুর", "মহেশপুর", "শৈলকুপা"], "খুলনা": ["ডুমুরিয়া", "বটিয়াঘাটা", "দাকোপ", "দিঘলিয়া", "কয়রা", "পাইকগাছা", "ফুলতলা", "রূপসা", "তেরখাদা"], "কুষ্টিয়া": ["কুষ্টিয়া সদর", "ভেড়ামারা", "দৌলতপুর", "কুমারখালী", "খোকসা", "মিরপুর"], "মাগুরা": ["মাগুরা সদর", "মহম্মদপুর", "শালিখা", "শ্রীপুর"], "মেহেরপুর": ["মেহেরপুর সদর", "গাংনী", "মুজিবনগর"], "নড়াইল": ["নড়াইল সদর", "কালিয়া", "লোহাগড়া"], "সাতক্ষীরা": ["সাতক্ষীরা সদর", "কলারোয়া", "আশাশুনি", "দেবহাটা", "কালিগঞ্জ", "শ্যামনগর", "তালা"], "বগুড়া": ["বগুড়া সদর", "আদমদীঘি", "ধুনট", "দুপচাঁচিয়া", "গাবতলী", "কাহালু", "নন্দীগ্রাম", "সারিয়াকান্দি", "שাজাহানপুর", "শেরপুর", "শিবগঞ্জ", "সোনাতলা"], "চাঁপাইনবাবগঞ্জ": ["চাঁপাইনবাবগঞ্জ সদর", "গোমস্তাপুর", "নাচোল", "ভোলাহাট", "শিবগঞ্জ"], "জয়পুরহাট": ["জয়পুরহাট সদর", "আক্কেলপুর", "কালাই", "ক্ষেতলাল", "পাঁচবিবি"], "নওগাঁ": ["নওগাঁ সদর", "আত্রাই", "বদলগাছী", "ধামইরহাট", "মান্দা", "মহাদেবপুর", "নিয়ামতপুর", "পত্নীতলা", "পোরশা", "রানীনগর", "সাপাহার"], "নাটোর": ["নাটোর সদর", "বাগাতিপাড়া", "বড়াইগ্রাম", "গুরুদাসপুর", "লালপুর", "সিংড়া", "নলডাঙ্গা"], "পাবনা": ["পাবনা সদর", "ঈশ্বরদী", "আটঘরিয়া", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর", "সাঁথিয়া", "সুজানগর"], "রাজশাহী": ["বাঘা", "বাগমারা", "চারঘাট", "দুর্গাপুর", "গোদাগাড়ী", "মোহনপুর", "পবা", "পুঠিয়া", "তানোর"], "সিরাজগঞ্জ": ["সিরাজগঞ্জ সদর", "বেলকুচি", "চৌহালী", "কামারখন্দ", "কাজীপুর", "রায়গঞ্জ", "শাহজাদপুর", "তাড়াশ", "উল্লাপাড়া"], "বরগুনা": ["বরগুনা সদর", "আমতলী", "বামনা", "বেতাগী", "পাথরঘাটা", "তালতলী"], "বরিশাল": ["বরিশাল সদর", "আগৈলঝাড়া", "বাবুগঞ্জ", "বানারীপাড়া", "গৌরনদী", "হিজলা", "মেহেন্দিগঞ্জ", "মুলাদী", "উজিরপুর", "বাকেরগঞ্জ"], "ভোলা": ["ভোলা সদর", "বোরহানউদ্দিন", "চরফ্যাশন", "দৌলতখান", "লালমোহন", "মনপুরা", "তজুমদ্দিন"], "ঝালকাঠি": ["ঝালকাঠি সদর", "কাঁঠালিয়া", "নলছিটি", "রাজাপুর"], "পটুয়াখালী": ["পটুয়াখালী সদর", "বাউফল", "দশমিনা", "গলাচিপা", "কলাপাড়া", "মির্জাগঞ্জ", "দুমকি", "রাঙ্গাবালী"], "পিরোজপুর": ["পিরোজপুর সদর", "ভান্ডারিয়া", "কাউখালী", "মঠবাড়িয়া", "নাজিরপুর", "নেসারেবাদ (স্বরূপকাঠি)", "ইন্দুরকানী"], "সিলেট": ["সিলেট সদর", "বালাগঞ্জ", "বিয়ানীবাজার", "কোম্পানীগঞ্জ", "ফেঞ্চুগঞ্জ", "গোলাপগঞ্জ", "গোয়াইনঘাট", "জৈন্তাপুর", "কানাইঘাট", "দক্ষিণ সুরমা", "জকিগঞ্জ", "ওসমানী নগর"], "হবিগঞ্জ": ["হবিগঞ্জ সদর", "আজমিরীগঞ্জ", "বানিয়াচং", "বাহুবল", "চুনারুঘাট", "লাখাই", "মাধবপুর", "নবীগঞ্জ"], "মৌলভীবাজার": ["মৌলভীবাজার সদর", "বড়লেখা", "জুড়ী", "কমলগঞ্জ", "কুলাউড়া", "রাজনগর", "শ্রীমঙ্গল"], "সুনামগঞ্জ": ["সুনামগঞ্জ সদর", "বিশ্বম্ভরপুর", "ছাতক", "দিরাই", "ধর্মপাশা", "দোয়ারাবাজার", "জগন্নাথপুর", "জামালগঞ্জ", "শাল্লা", "তাহিরপুর", "দক্ষিণ সুনামগঞ্জ"], "দিনাজপুর": ["দিনাজপুর সদর", "বিরামপুর", "বীরগঞ্জ", "বিরল", "বোচাগঞ্জ", "চিরিরবন্দর", "ফুলবাড়ী", "ঘোড়াঘাট", "হাকিমপুর", "কাহারোল", "খানসামা", "নবাবগঞ্জ", "পার্বতীপুর"], "গাইবান্ধা": ["গাইবান্ধা সদর", "ফুলছড়ি", "গোবিন্দগঞ্জ", "পলাশবাড়ী", "সাদুল্লাপুর", "সাঘাটা", "সুন্দরগঞ্জ"], "কুড়িগ্রাম": ["কুড়িগ্রাম সদর", "ভূরুঙ্গামারী", "চর রাজিবপুর", "চিলমারী", "ফুলবাড়ী", "নাগেশ্বরী", "রাজারহাট", "রৌমারী", "উলিপুর"], "লালমনিরহাট": ["লালমনিরহাট সদর", "আদিতমারী", "হাতীবান্ধা", "কালীগঞ্জ", "পাটগ্রাম"], "নীলফামারী": ["নীলফামারী সদর", "ডোমার", "ডিমলা", "জলঢাকা", "কিশোরগঞ্জ", "সৈয়দপুর"], "পঞ্চগড়": ["পঞ্চগড় সদর", "আটোয়ারী", "বোদা", "দেবীগঞ্জ", "তেঁতুলিয়া"], "রংপুর": ["রংপুর সদর", "বদরগঞ্জ", "গঙ্গাচড়া", "কাউনিয়া", "মিঠাপুকুর", "পীরগাছা", "পীরগঞ্জ", "তারাগঞ্জ"], "ঠাকুরগাঁও": ["ঠাকুরগাঁও সদর", "বালিয়াডাঙ্গী", "হরিপুর", "পীরগঞ্জ", "রানীশংকৈল"], "জামালপুর": ["জামালপুর সদর", "বকশীগঞ্জ", "দেওয়ানগঞ্জ", "ইসলামপুর", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"], "ময়মনসিংহ": ["ময়মনসিংহ সদর", "ভালুকা", "ধোবাউড়া", "ফুলবাড়ীয়া", "গফরগাঁও", "গৌরীপুর", "হালুয়াঘাট", "ঈশ্বরগঞ্জ", "মুক্তাগাছা", "নান্দাইল", "ফুলপুর", "তারাকান্দা", "ত্রিশাল"], "নেত্রকোনা": ["নেত্রকোনা সদর", "বারহাট্টা", "দুর্গাপুর", "কেন্দুয়া", "কলমাকান্দা", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "খালিয়াজুরী", "আটপাড়া"], "শেরপুর": ["শেরপুর সদর", "ঝিনাইগাতী", "নকলা", "নালিতাবাড়ী", "শ্রীবরদী"] };
 const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbzQCjKrtEMu4jj5ppWnnuMpJrOSIkKDVakGgwOeQUfyWWq0lsns14kLd0gMcd0HDS91/exec";
 
 // --- App State & Local Storage ---
@@ -141,6 +145,44 @@ function renderReviews(reviewsToRender, gridElement) {
     }).join('');
 }
 
+function renderComboCreator() {
+    const container = document.getElementById('combo-offer-creator');
+    if (!container) return;
+
+    const optionsHTML = ACHAR_PRODUCTS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+
+    container.innerHTML = `
+        <div class="card-modern p-6 md:p-8 bg-gradient-subtle border-primary/50">
+            <h3 class="text-2xl font-bold text-gradient mb-2 text-center">আচার কম্বো অফার!</h3>
+            <p class="text-muted-foreground mb-6 text-center">আপনার পছন্দের যেকোন দুইটি আচার একসাথে নিলে ডেলিভারি চার্জ সম্পূর্ণ ফ্রি!</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="achar1" class="block text-sm font-medium mb-1">প্রথম আচার</label>
+                    <select id="achar1" class="w-full p-2 border rounded-md bg-input">${optionsHTML}</select>
+                </div>
+                <div>
+                    <label for="achar2" class="block text-sm font-medium mb-1">দ্বিতীয় আচার</label>
+                    <select id="achar2" class="w-full p-2 border rounded-md bg-input"></select>
+                </div>
+            </div>
+            <button onclick="orderCombo()" class="w-full btn-primary text-lg py-3 rounded-md">কম্বো অর্ডার করুন (৳${ACHAR_PRODUCTS[0].price * 2})</button>
+        </div>
+    `;
+    
+    const achar1Select = document.getElementById('achar1');
+    const achar2Select = document.getElementById('achar2');
+
+    function updateAchar2Options() {
+        const selectedAchar1 = achar1Select.value;
+        const filteredOptions = ACHAR_PRODUCTS.filter(p => p.id !== selectedAchar1);
+        achar2Select.innerHTML = filteredOptions.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+    }
+
+    achar1Select.addEventListener('change', updateAchar2Options);
+    updateAchar2Options();
+}
+
+
 // --- Cart & Order Logic ---
 function addToCart(productId) {
     const product = PRODUCTS.find(p => p.id === productId);
@@ -179,6 +221,33 @@ function orderNow(productId) {
     window.location.href = 'checkout.html';
 }
 
+function orderCombo() {
+    const achar1Id = document.getElementById('achar1').value;
+    const achar2Id = document.getElementById('achar2').value;
+
+    if (!achar1Id || !achar2Id) {
+        showToast("ত্রুটি", "অনুগ্রহ করে দুটি আচার নির্বাচন করুন।", "destructive");
+        return;
+    }
+
+    const p1 = ACHAR_PRODUCTS.find(p => p.id === achar1Id);
+    const p2 = ACHAR_PRODUCTS.find(p => p.id === achar2Id);
+
+    const comboItem = {
+        id: `combo_${p1.id}_${p2.id}`,
+        name: `আচার কম্বো (${p1.name_en} + ${p2.name_en})`,
+        price: p1.price + p2.price,
+        quantity: 1,
+        image: 'assets/achar_mixed.jpg',
+        freeDelivery: true,
+        isCombo: true
+    };
+    
+    localStorage.setItem('shobkichuCheckout', JSON.stringify([comboItem]));
+    window.location.href = 'checkout.html';
+}
+
+
 function goToCheckout() {
     if (CART.length === 0) {
         showToast("কার্ট খালি", "অর্ডার করার জন্য অনুগ্রহ করে পণ্য যোগ করুন।", "warning");
@@ -189,10 +258,6 @@ function goToCheckout() {
 }
 
 // --- Search Logic ---
-function normalizeSearchTerm(str) {
-  return str.toLowerCase().replace(/\s/g, '').replace(/গ্রাম/g, 'g').replace(/কেজি/g, 'kg');
-}
-
 function handleSearch(event) {
     const searchTerm = event.target.value.trim();
     const { 
@@ -216,15 +281,14 @@ function handleSearch(event) {
         if (searchNoResultsEl) searchNoResultsEl.classList.add('hidden');
 
         renderProducts(PRODUCTS.filter(p => p.freeDelivery), offerGrid);
-        renderProducts(PRODUCTS.filter(p => !p.freeDelivery), productGrid);
+        renderProducts(PRODUCTS, productGrid);
         return;
     }
     
     const filteredProducts = PRODUCTS.filter(p => 
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        normalizeSearchTerm(p.weight).includes(normalizeSearchTerm(searchTerm))
+        p.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     if (filteredProducts.length === 0) {
@@ -235,7 +299,7 @@ function handleSearch(event) {
         if (searchNoResultsEl) searchNoResultsEl.classList.add('hidden');
 
         const offerProducts = filteredProducts.filter(p => p.freeDelivery);
-        const regularProducts = filteredProducts.filter(p => !p.freeDelivery);
+        const regularProducts = filteredProducts;
 
         if (offersSection) offersSection.style.display = offerProducts.length > 0 ? 'block' : 'none';
         if (productsSection) productsSection.style.display = regularProducts.length > 0 ? 'block' : 'none';
@@ -248,10 +312,11 @@ function handleSearch(event) {
 
 // --- THEME & UI LOGIC ---
 function updateTheme() {
-  const isDark = document.documentElement.classList.contains('dark');
-  DOM_REFERENCES.themeIconSun.classList.toggle('hidden', !isDark);
-  DOM_REFERENCES.themeIconMoon.classList.toggle('hidden', isDark);
-  localStorage.setItem('shobkichuTheme', isDark ? 'dark' : 'light');
+    if (!DOM_REFERENCES.themeIconSun || !DOM_REFERENCES.themeIconMoon) return;
+    const isDark = document.documentElement.classList.contains('dark');
+    DOM_REFERENCES.themeIconSun.classList.toggle('hidden', !isDark);
+    DOM_REFERENCES.themeIconMoon.classList.toggle('hidden', isDark);
+    localStorage.setItem('shobkichuTheme', isDark ? 'dark' : 'light');
 }
 
 // --- Page Initializers ---
@@ -271,8 +336,9 @@ function initializeHomepage() {
     DOM_REFERENCES.faqSection = document.getElementById('faq');
     DOM_REFERENCES.searchNoResultsEl = document.getElementById('search-no-results');
     
-    renderProducts(PRODUCTS.filter(p => !p.freeDelivery), DOM_REFERENCES.productGrid);
+    renderProducts(PRODUCTS, DOM_REFERENCES.productGrid);
     renderProducts(PRODUCTS.filter(p => p.freeDelivery), DOM_REFERENCES.offerGrid);
+    renderComboCreator();
     if(DOM_REFERENCES.reviewGrid) renderReviews(REVIEWS.slice(0, 3), DOM_REFERENCES.reviewGrid);
     
     DOM_REFERENCES.searchBar.addEventListener('input', handleSearch);
@@ -308,7 +374,7 @@ function initializeHomepage() {
 function initializeReviewPage() {
     const reviewGrid = document.getElementById('review-grid-full');
     const sortSelect = document.getElementById('review-sort');
-
+    if (!reviewGrid || !sortSelect) return;
     function sortAndRenderReviews(sortBy) {
         let sortedReviews = [...REVIEWS];
         if (sortBy === 'highest_rating') {
@@ -318,16 +384,9 @@ function initializeReviewPage() {
         }
         renderReviews(sortedReviews, reviewGrid);
     }
-
-    if (sortSelect) {
-        sortSelect.addEventListener('change', (e) => {
-            sortAndRenderReviews(e.target.value);
-        });
-    }
-
+    sortSelect.addEventListener('change', (e) => sortAndRenderReviews(e.target.value));
     sortAndRenderReviews('most_recent');
 }
-
 
 function initializeProductPage() {
     const container = document.getElementById('product-details-container');
@@ -338,39 +397,7 @@ function initializeProductPage() {
 
     if (product) {
         document.title = `${product.name} - সবকিছু.com`;
-        
-        const schema = {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": product.name,
-            "image": [ window.location.origin + "/" + product.image ],
-            "description": product.description,
-            "sku": product.id,
-            "brand": {
-                "@type": "Brand",
-                "name": "সবকিছু.com"
-            },
-            "offers": {
-                "@type": "Offer",
-                "url": window.location.href,
-                "priceCurrency": "BDT",
-                "price": product.price,
-                "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                "itemCondition": "https://schema.org/NewCondition"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": product.rating || "4.5",
-              "reviewCount": REVIEWS.length + 5
-            }
-        };
-        const schemaScript = document.createElement('script');
-        schemaScript.type = 'application/ld+json';
-        schemaScript.textContent = JSON.stringify(schema);
-        document.head.appendChild(schemaScript);
-
         const isOutOfStock = product.stock === 0;
-
         container.innerHTML = `
           <div class="animate-fade-in">
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -407,7 +434,6 @@ function initializeProductPage() {
 function initializeCheckoutPage() {
     const itemsJSON = localStorage.getItem('shobkichuCheckout');
     let items = itemsJSON ? JSON.parse(itemsJSON) : [];
-    
     const container = document.getElementById('checkout-container');
     if (!container) return;
 
@@ -418,7 +444,6 @@ function initializeCheckoutPage() {
 
     const orderSummaryEl = document.getElementById('order-summary');
     const checkoutForm = document.getElementById('checkout-form');
-    
     const divisionSelect = checkoutForm.division;
     divisionSelect.innerHTML = '<option value="" disabled selected>বিভাগ নির্বাচন করুন</option>';
     for (const division in DIVISIONS_AND_DISTRICTS) {
@@ -426,79 +451,37 @@ function initializeCheckoutPage() {
     }
 
     window.removeFromCart = function(productId) {
-        const itemIndex = items.findIndex(i => i.id === productId);
-        if (itemIndex > -1) {
-            const removedItemName = items[itemIndex].name;
-            items.splice(itemIndex, 1); 
-
-            CART = CART.filter(item => item.id !== productId);
-            saveCartToStorage();
-            
-            localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
-
-            renderSummary();
-            updateCartCount();
-            showToast("পণ্য মুছে ফেলা হয়েছে", `${removedItemName} কার্ট থেকে মুছে ফেলা হয়েছে।`);
-
-            if (items.length === 0) {
-                container.innerHTML = `<div class="text-center py-20 card-modern"><h2 class="text-2xl font-bold">আপনার কার্ট খালি</h2><p class="text-muted-foreground mt-2">অর্ডার করার জন্য কোনো পণ্য নির্বাচন করা হয়নি।</p><a href="index.html" class="btn-primary mt-6 inline-block px-6 py-2">কেনাকাটা শুরু করুন</a></div>`;
-            }
+        items = items.filter(i => i.id !== productId);
+        CART = CART.filter(item => item.id !== productId);
+        saveCartToStorage();
+        localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
+        renderSummary();
+        updateCartCount();
+        if (items.length === 0) {
+            container.innerHTML = `<div class="text-center py-20 card-modern"><h2 class="text-2xl font-bold">আপনার কার্ট খালি</h2><p class="text-muted-foreground mt-2">অর্ডার করার জন্য কোনো পণ্য নির্বাচন করা হয়নি।</p><a href="index.html" class="btn-primary mt-6 inline-block px-6 py-2">কেনাকাটা শুরু করুন</a></div>`;
         }
     }
 
-
     function renderSummary() {
-        if (items.length === 0) {
-            orderSummaryEl.innerHTML = '';
-            return;
-        }
-
+        if (!orderSummaryEl) return;
         const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const productIdsInCheckout = items.map(item => item.id);
-        const productsData = PRODUCTS.filter(p => productIdsInCheckout.includes(p.id));
-        const isFreeDeliveryApplicable = productsData.length > 0 && productsData.every(p => p.freeDelivery);
-        
+        const isFreeDeliveryApplicable = items.every(item => item.freeDelivery);
         const selectedDistrict = checkoutForm.district.value;
         let deliveryCharge = 0;
 
         if (!isFreeDeliveryApplicable) {
-            if (SHIPPING_CHARGES[selectedDistrict]) {
-                deliveryCharge = SHIPPING_CHARGES[selectedDistrict];
-            } else if (selectedDistrict) {
-                deliveryCharge = SHIPPING_CHARGES["অন্যান্য"];
-            }
+            deliveryCharge = SHIPPING_CHARGES[selectedDistrict] || (selectedDistrict ? SHIPPING_CHARGES["অন্যান্য"] : 0);
         }
         
         const total = subtotal + deliveryCharge;
-
         orderSummaryEl.innerHTML = `
             <h3 class="text-2xl font-bold text-gradient mb-6">অর্ডার সারাংশ</h3>
-            <div class="space-y-4 mb-6">
-                ${items.map(item => `
-                    <div class="flex justify-between items-center text-sm">
-                        <div class="flex items-center gap-3">
-                            <img src="${item.image}" class="w-12 h-12 rounded-md object-cover">
-                            <div>
-                                <p class="font-medium text-foreground">${item.name}</p>
-                                <p class="text-muted-foreground">পরিমাণ: ${item.quantity}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <p class="font-medium text-foreground">৳${item.price * item.quantity}</p>
-                            <button onclick="removeFromCart('${item.id}')" title="মুছে ফেলুন" class="p-1 text-muted-foreground hover:text-destructive transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
+            <div class="space-y-4 mb-6">${items.map(item => `...`).join('')}</div>
             <div class="space-y-3 pt-4 border-t border-border">
                 <div class="flex justify-between text-muted-foreground"><span>সাব-টোটাল</span><span class="font-medium">৳${subtotal}</span></div>
                 <div class="flex justify-between text-muted-foreground"><span>ডেলিভারি চার্জ</span><span class="font-medium">${deliveryCharge === 0 ? (isFreeDeliveryApplicable ? 'ফ্রি' : 'জেলা নির্বাচন করুন') : `৳${deliveryCharge}`}</span></div>
                 <div class="flex justify-between font-bold text-lg text-foreground pt-2 border-t border-border"><span>মোট</span><span>৳${total}</span></div>
-            </div>
-             <a href="index.html" class="text-primary hover:underline text-center block mt-6">❮ আরও কেনাকাটা করুন</a>
-        `;
+            </div>`;
     }
 
     checkoutForm.addEventListener('change', e => {
@@ -506,25 +489,20 @@ function initializeCheckoutPage() {
             const division = checkoutForm.division.value;
             const districtSelect = checkoutForm.district;
             const thanaSelect = checkoutForm.thana;
-            
             if (e.target.name === 'division') {
                 districtSelect.innerHTML = '<option value="" disabled selected>জেলা নির্বাচন করুন</option>';
                 thanaSelect.innerHTML = '<option value="" disabled selected>আগে জেলা নির্বাচন করুন</option>';
                 thanaSelect.disabled = true;
-                if (division && DIVISIONS_AND_DISTRICTS[division]) {
-                    DIVISIONS_AND_DISTRICTS[division].forEach(d => { districtSelect.innerHTML += `<option value="${d}">${d}</option>`; });
+                if (division) {
+                    DIVISIONS_AND_DISTRICTS[division].forEach(d => districtSelect.innerHTML += `<option value="${d}">${d}</option>`);
                     districtSelect.disabled = false;
-                } else {
-                    districtSelect.disabled = true;
                 }
-            } else if (e.target.name === 'district') {
+            } else {
                 const district = districtSelect.value;
                 thanaSelect.innerHTML = '<option value="" disabled selected>থানা/উপজেলা নির্বাচন করুন</option>';
-                if (district && DISTRICTS_AND_THANAS[district]) {
-                    DISTRICTS_AND_THANAS[district].forEach(t => { thanaSelect.innerHTML += `<option value="${t}">${t}</option>`; });
+                if (district) {
+                    DISTRICTS_AND_THANAS[district].forEach(t => thanaSelect.innerHTML += `<option value="${t}">${t}</option>`);
                     thanaSelect.disabled = false;
-                } else {
-                    thanaSelect.disabled = true;
                 }
             }
             renderSummary();
@@ -544,29 +522,20 @@ function initializeCheckoutPage() {
         submitBtn.textContent = 'প্রসেসিং...';
         
         const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const productIdsInCheckout = items.map(item => item.id);
-        const productsData = PRODUCTS.filter(p => productIdsInCheckout.includes(p.id));
-        const isFreeDeliveryApplicable = productsData.length > 0 && productsData.every(p => p.freeDelivery);
+        const isFreeDeliveryApplicable = items.every(item => item.freeDelivery);
         let deliveryCharge = 0;
         if (!isFreeDeliveryApplicable) {
             const selectedDistrict = checkoutForm.district.value;
             deliveryCharge = SHIPPING_CHARGES[selectedDistrict] || SHIPPING_CHARGES["অন্যান্য"];
         }
         const total = subtotal + deliveryCharge;
-        const itemsData = items.map(item => `${item.name} (পরিমাণ: ${item.quantity})`).join(', ');
-        
         const fullAddress = `${checkoutForm.address.value}, থানা: ${checkoutForm.thana.value}, জেলা: ${checkoutForm.district.value}, বিভাগ: ${checkoutForm.division.value}`;
         
-        const success = await submitToGoogleSheet({
-            customerName: checkoutForm.customerName.value,
-            phoneNumber: checkoutForm.phoneNumber.value,
-            address: fullAddress,
-            deliveryLocation: checkoutForm.district.value,
-            items: itemsData,
-            totalAmount: total
-        });
+        const orderDetailsForConfirmation = { customerName: checkoutForm.customerName.value, phoneNumber: checkoutForm.phoneNumber.value, fullAddress, items, subtotal, deliveryCharge, total };
+        const success = await submitToGoogleSheet({ ...orderDetailsForConfirmation, deliveryLocation: checkoutForm.district.value, items: items.map(item => `${item.name} (x${item.quantity})`).join(', '), totalAmount: total });
         
         if (success) {
+            localStorage.setItem('shobkichuOrderConfirmation', JSON.stringify(orderDetailsForConfirmation));
             if (JSON.stringify(CART) === JSON.stringify(items)) {
                 CART = [];
                 saveCartToStorage();
@@ -582,45 +551,97 @@ function initializeCheckoutPage() {
     renderSummary();
 }
 
+function initializeThankYouPage() {
+    const container = document.getElementById('order-summary-details');
+    const heading = document.getElementById('thank-you-heading');
+    const subheading = document.getElementById('thank-you-subheading');
+
+    if (!container || !heading || !subheading) return;
+
+    const orderDetailsJSON = localStorage.getItem('shobkichuOrderConfirmation');
+    if (orderDetailsJSON) {
+        const details = JSON.parse(orderDetailsJSON);
+        
+        heading.innerHTML = `ধন্যবাদ <span class="text-gradient">${details.customerName}</span>!`;
+        subheading.textContent = 'আপনার অর্ডারটি সফলভাবে নিশ্চিত করা হয়েছে। নিচে আপনার অর্ডারের বিবরণ দেওয়া হলো:';
+
+        container.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-foreground border-b border-border pb-2">আপনার বিলিং তথ্য</h4>
+                    <p class="text-muted-foreground"><strong>নাম:</strong> ${details.customerName}</p>
+                    <p class="text-muted-foreground"><strong>ফোন:</strong> ${details.phoneNumber}</p>
+                    <p class="text-muted-foreground"><strong>ঠিকানা:</strong> ${details.fullAddress}</p>
+                </div>
+                 <div class="space-y-3">
+                    <h4 class="font-semibold text-foreground border-b border-border pb-2">অর্ডার বিবরণ</h4>
+                    <div class="space-y-2">
+                        ${details.items.map(item => `
+                            <div class="flex justify-between items-center text-muted-foreground">
+                                <span>${item.name} (x${item.quantity})</span>
+                                <span>৳${item.price * item.quantity}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <hr class="border-border !my-4">
+                    <div class="space-y-2 pt-2 font-medium">
+                         <div class="flex justify-between text-muted-foreground"><span>সাব-টোটাল:</span><span>৳${details.subtotal}</span></div>
+                         <div class="flex justify-between text-muted-foreground"><span>ডেলিভারি চার্জ:</span><span>৳${details.deliveryCharge}</span></div>
+                         <div class="flex justify-between font-bold text-lg text-foreground"><span>সর্বমোট:</span><span>৳${details.total}</span></div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        localStorage.removeItem('shobkichuOrderConfirmation');
+    } else {
+        heading.textContent = 'ধন্যবাদ!';
+        subheading.textContent = 'আপনার অর্ডারটি সফলভাবে নিশ্চিত করা হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।';
+        container.style.display = 'none';
+    }
+}
+
 
 // --- GLOBAL INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
     DOM_REFERENCES = {
-        mainHeader: document.getElementById('main-header'),
-        cartBtn: document.getElementById('cart-btn'),
-        cartItemCountEl: document.getElementById('cart-item-count'),
-        modalsContainer: document.getElementById('modals-container'),
         toastEl: document.getElementById('toast'),
         toastTitleEl: document.getElementById('toast-title'),
         toastDescriptionEl: document.getElementById('toast-description'),
+        // Header elements that might not be on every page
+        cartBtn: document.getElementById('cart-btn'),
+        cartItemCountEl: document.getElementById('cart-item-count'),
         themeToggleBtn: document.getElementById('theme-toggle-btn'),
         themeIconSun: document.getElementById('theme-icon-sun'),
         themeIconMoon: document.getElementById('theme-icon-moon'),
     };
     
-    const preferredTheme = localStorage.getItem('shobkichuTheme');
-    if (preferredTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    updateTheme();
-    
-    loadCartFromStorage();
-    updateCartCount();
-    
-    if (document.getElementById('product-grid')) initializeHomepage();
-    if (document.getElementById('product-details-container')) initializeProductPage();
-    if (document.getElementById('review-grid-full')) initializeReviewPage();
-    if (document.getElementById('checkout-container')) initializeCheckoutPage();
-
-    if (DOM_REFERENCES.themeToggleBtn) {
+    // Safely initialize theme toggle
+    if (DOM_REFERENCES.themeToggleBtn && DOM_REFERENCES.themeIconSun && DOM_REFERENCES.themeIconMoon) {
+        const preferredTheme = localStorage.getItem('shobkichuTheme');
+        if (preferredTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        updateTheme();
         DOM_REFERENCES.themeToggleBtn.addEventListener('click', () => {
             document.documentElement.classList.toggle('dark');
             updateTheme();
         });
     }
-    if (DOM_REFERENCES.cartBtn) {
+
+    // Safely initialize cart icon
+    if (DOM_REFERENCES.cartBtn && DOM_REFERENCES.cartItemCountEl) {
+        loadCartFromStorage();
+        updateCartCount();
         DOM_REFERENCES.cartBtn.addEventListener('click', goToCheckout);
     }
+    
+    // Page-specific initializers
+    if (document.getElementById('product-grid')) initializeHomepage();
+    if (document.getElementById('product-details-container')) initializeProductPage();
+    if (document.getElementById('review-grid-full')) initializeReviewPage();
+    if (document.getElementById('checkout-container')) initializeCheckoutPage();
+    if (document.getElementById('thank-you-page-body')) initializeThankYouPage();
 });
