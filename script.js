@@ -23,6 +23,7 @@ const PRODUCTS = [
 ];
 
 const ACHAR_PRODUCTS = PRODUCTS.filter(p => p.id.startsWith("achar_"));
+const BALACHAO_PRODUCTS = PRODUCTS.filter(p => p.id.startsWith("balachao_"));
 
 // --- Review Data ---
 const REVIEWS = [
@@ -154,7 +155,14 @@ function renderComboCreator() {
     container.innerHTML = `
         <div class="card-modern p-6 md:p-8 bg-gradient-subtle border-primary/50">
             <h3 class="text-2xl font-bold text-gradient mb-2 text-center">আচার কম্বো অফার!</h3>
-            <p class="text-muted-foreground mb-6 text-center">আপনার পছন্দের যেকোন দুইটি আচার একসাথে নিলে ডেলিভারি চার্জ সম্পূর্ণ ফ্রি!</p>
+            <p class="text-muted-foreground mb-6 text-center">আপনার পছন্দের যেকোন দুইটি আচার একসাথে নিন মাত্র ৳৯০০ টাকায়, সাথে ডেলিভারি চার্জ সম্পূর্ণ ফ্রি!</p>
+            
+            <div class="flex justify-center items-center gap-4 mb-6">
+                <img id="achar1-img" src="" alt="প্রথম আচার" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-md border-2 border-border transition-all duration-300">
+                <span class="text-2xl font-bold text-muted-foreground">+</span>
+                <img id="achar2-img" src="" alt="দ্বিতীয় আচার" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-md border-2 border-border transition-all duration-300">
+            </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
                     <label for="achar1" class="block text-sm font-medium mb-1">প্রথম আচার</label>
@@ -165,21 +173,97 @@ function renderComboCreator() {
                     <select id="achar2" class="w-full p-2 border rounded-md bg-input"></select>
                 </div>
             </div>
-            <button onclick="orderCombo()" class="w-full btn-primary text-lg py-3 rounded-md">কম্বো অর্ডার করুন (৳${ACHAR_PRODUCTS[0].price * 2})</button>
+            <button onclick="orderAcharCombo()" class="w-full btn-primary text-lg py-3 rounded-md">কম্বো অর্ডার করুন (৳900)</button>
         </div>
     `;
     
     const achar1Select = document.getElementById('achar1');
     const achar2Select = document.getElementById('achar2');
+    const achar1Img = document.getElementById('achar1-img');
+    const achar2Img = document.getElementById('achar2-img');
 
-    function updateAchar2Options() {
-        const selectedAchar1 = achar1Select.value;
-        const filteredOptions = ACHAR_PRODUCTS.filter(p => p.id !== selectedAchar1);
+    function updateAcharComboUI() {
+        const selectedAchar1Id = achar1Select.value;
+        
+        // Update second dropdown options
+        const filteredOptions = ACHAR_PRODUCTS.filter(p => p.id !== selectedAchar1Id);
         achar2Select.innerHTML = filteredOptions.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+        
+        const selectedAchar2Id = achar2Select.value;
+        
+        // Update images
+        const product1 = ACHAR_PRODUCTS.find(p => p.id === selectedAchar1Id);
+        const product2 = ACHAR_PRODUCTS.find(p => p.id === selectedAchar2Id);
+        
+        if (product1) achar1Img.src = product1.image;
+        if (product2) achar2Img.src = product2.image;
     }
 
-    achar1Select.addEventListener('change', updateAchar2Options);
-    updateAchar2Options();
+    achar1Select.addEventListener('change', updateAcharComboUI);
+    achar2Select.addEventListener('change', updateAcharComboUI);
+    
+    // Initial setup
+    updateAcharComboUI();
+}
+
+
+function renderBalachaoAcharCombo() {
+    const container = document.getElementById('balachao-achar-combo-creator');
+    if (!container) return;
+
+    const balachaoOptionsHTML = BALACHAO_PRODUCTS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+    const acharOptionsHTML = ACHAR_PRODUCTS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+
+    container.innerHTML = `
+        <div class="card-modern p-6 md:p-8 bg-gradient-subtle border-secondary/50">
+            <h3 class="text-2xl font-bold text-gradient mb-2 text-center" style="background-image: var(--gradient-secondary);">বালাচাও + আচার কম্বো!</h3>
+            <p class="text-muted-foreground mb-6 text-center">যেকোনো একটি বালাচাও ও একটি আচার একসাথে নিলে ডেলিভারি চার্জ সম্পূর্ণ ফ্রি!</p>
+            
+            <div class="flex justify-center items-center gap-4 mb-6">
+                <img id="balachao-combo-img" src="" alt="বালাচাও" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-md border-2 border-border transition-all duration-300">
+                <span class="text-2xl font-bold text-muted-foreground">+</span>
+                <img id="achar-combo-img" src="" alt="আচার" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-md border-2 border-border transition-all duration-300">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="balachao-select" class="block text-sm font-medium mb-1">বালাচাও</label>
+                    <select id="balachao-select" class="w-full p-2 border rounded-md bg-input">${balachaoOptionsHTML}</select>
+                </div>
+                <div>
+                    <label for="achar-select" class="block text-sm font-medium mb-1">আচার</label>
+                    <select id="achar-select" class="w-full p-2 border rounded-md bg-input">${acharOptionsHTML}</select>
+                </div>
+            </div>
+            <button id="balachao-achar-combo-btn" onclick="orderBalachaoAcharCombo()" class="w-full btn-primary text-lg py-3 rounded-md">কম্বো অর্ডার করুন</button>
+        </div>
+    `;
+
+    const balachaoSelect = document.getElementById('balachao-select');
+    const acharSelect = document.getElementById('achar-select');
+    const balachaoImg = document.getElementById('balachao-combo-img');
+    const acharImg = document.getElementById('achar-combo-img');
+    const comboBtn = document.getElementById('balachao-achar-combo-btn');
+
+    function updateBAComboUI() {
+        const balachaoId = balachaoSelect.value;
+        const acharId = acharSelect.value;
+
+        const balachaoProduct = BALACHAO_PRODUCTS.find(p => p.id === balachaoId);
+        const acharProduct = ACHAR_PRODUCTS.find(p => p.id === acharId);
+
+        if (balachaoProduct) balachaoImg.src = balachaoProduct.image;
+        if (acharProduct) acharImg.src = acharProduct.image;
+
+        const totalPrice = (balachaoProduct?.price || 0) + (acharProduct?.price || 0);
+        comboBtn.textContent = `কম্বো অর্ডার করুন (৳${totalPrice})`;
+    }
+
+    balachaoSelect.addEventListener('change', updateBAComboUI);
+    acharSelect.addEventListener('change', updateBAComboUI);
+    
+    // Initial setup
+    updateBAComboUI();
 }
 
 
@@ -221,24 +305,53 @@ function orderNow(productId) {
     window.location.href = 'checkout.html';
 }
 
-function orderCombo() {
+function orderAcharCombo() {
     const achar1Id = document.getElementById('achar1').value;
     const achar2Id = document.getElementById('achar2').value;
-
-    if (!achar1Id || !achar2Id) {
-        showToast("ত্রুটি", "অনুগ্রহ করে দুটি আচার নির্বাচন করুন।", "destructive");
-        return;
-    }
 
     const p1 = ACHAR_PRODUCTS.find(p => p.id === achar1Id);
     const p2 = ACHAR_PRODUCTS.find(p => p.id === achar2Id);
 
+    if (!p1 || !p2) {
+        showToast("ত্রুটি", "অনুগ্রহ করে দুটি আচার নির্বাচন করুন।", "destructive");
+        return;
+    }
+
     const comboItem = {
-        id: `combo_${p1.id}_${p2.id}`,
+        id: `combo_achar_${p1.id}_${p2.id}`,
         name: `আচার কম্বো (${p1.name_en} + ${p2.name_en})`,
-        price: p1.price + p2.price,
+        price: 900,
         quantity: 1,
-        image: 'assets/achar_mixed.jpg',
+        image: 'assets/achar_mixed.jpg', // Default combo image
+        freeDelivery: true,
+        isCombo: true
+    };
+    
+    localStorage.setItem('shobkichuCheckout', JSON.stringify([comboItem]));
+    window.location.href = 'checkout.html';
+}
+
+
+function orderBalachaoAcharCombo() {
+    const balachaoId = document.getElementById('balachao-select').value;
+    const acharId = document.getElementById('achar-select').value;
+
+    const balachaoProduct = BALACHAO_PRODUCTS.find(p => p.id === balachaoId);
+    const acharProduct = ACHAR_PRODUCTS.find(p => p.id === acharId);
+    
+    if (!balachaoProduct || !acharProduct) {
+        showToast("ত্রুটি", "অনুগ্রহ করে একটি বালাচাও ও একটি আচার নির্বাচন করুন।", "destructive");
+        return;
+    }
+
+    const totalPrice = balachaoProduct.price + acharProduct.price;
+
+    const comboItem = {
+        id: `combo_ba_${balachaoProduct.id}_${acharProduct.id}`,
+        name: `বালাচাও-আচার কম্বো (${balachaoProduct.name_en} + ${acharProduct.name_en})`,
+        price: totalPrice,
+        quantity: 1,
+        image: balachaoProduct.image, // Using balachao image as primary
         freeDelivery: true,
         isCombo: true
     };
@@ -339,6 +452,7 @@ function initializeHomepage() {
     renderProducts(PRODUCTS, DOM_REFERENCES.productGrid);
     renderProducts(PRODUCTS.filter(p => p.freeDelivery), DOM_REFERENCES.offerGrid);
     renderComboCreator();
+    renderBalachaoAcharCombo();
     if(DOM_REFERENCES.reviewGrid) renderReviews(REVIEWS.slice(0, 3), DOM_REFERENCES.reviewGrid);
     
     DOM_REFERENCES.searchBar.addEventListener('input', handleSearch);
