@@ -576,6 +576,49 @@ function initializeCheckoutPage() {
         }
     }
 
+    window.increaseQuantity = function(productId) {
+        const product = PRODUCTS.find(p => p.id === productId);
+        let item = items.find(i => i.id === productId);
+
+        if (item && product) {
+            if (item.quantity >= product.stock) {
+                showToast("স্টক সীমিত", `দুঃখিত, এই পণ্যের মাত্র ${product.stock}টি ইউনিট স্টকে আছে।`, "warning");
+                return;
+            }
+            if (item.quantity >= 20) {
+                showToast("সীমা অতিক্রম করেছে", "আপনি একটি পণ্যের সর্বোচ্চ ২০টি ইউনিট যোগ করতে পারেন।", "warning");
+                return;
+            }
+            item.quantity++;
+            
+            let cartItem = CART.find(i => i.id === productId);
+            if(cartItem) cartItem.quantity = item.quantity;
+
+            saveCartToStorage();
+            localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
+            renderSummary();
+            updateCartCount();
+        }
+    }
+
+    window.decreaseQuantity = function(productId) {
+        let item = items.find(i => i.id === productId);
+        if (item) {
+            item.quantity--;
+            if (item.quantity < 1) {
+                removeFromCart(productId);
+            } else {
+                let cartItem = CART.find(i => i.id === productId);
+                if(cartItem) cartItem.quantity = item.quantity;
+                
+                saveCartToStorage();
+                localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
+                renderSummary();
+                updateCartCount();
+            }
+        }
+    }
+
     function renderSummary() {
         if (!orderSummaryEl) return;
         const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -596,11 +639,18 @@ function initializeCheckoutPage() {
                         <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover border border-border">
                         <div class="flex-1">
                             <h4 class="font-semibold text-foreground">${item.name}</h4>
-                            <p class="text-sm text-muted-foreground">পরিমাণ: ${item.quantity}</p>
+                            <div class="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                                <span>পরিমাণ:</span>
+                                <div class="flex items-center border rounded-md">
+                                    <button type="button" onclick="decreaseQuantity('${item.id}')" class="w-7 h-7 flex items-center justify-center hover:bg-accent transition-colors rounded-l-md">-</button>
+                                    <span class="w-8 text-center">${item.quantity}</span>
+                                    <button type="button" onclick="increaseQuantity('${item.id}')" class="w-7 h-7 flex items-center justify-center hover:bg-accent transition-colors rounded-r-md">+</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="text-right">
                             <span class="font-semibold text-foreground">৳${item.price * item.quantity}</span>
-                            <button onclick="removeFromCart('${item.id}')" class="text-xs text-destructive hover:underline ml-2">মুছুন</button>
+                            <button onclick="removeFromCart('${item.id}')" class="text-xs text-destructive hover:underline ml-2 mt-1 block">মুছুন</button>
                         </div>
                     </div>
                 `).join('')}
