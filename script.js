@@ -150,23 +150,20 @@ function renderComboCreator() {
     const container = document.getElementById('combo-offer-creator');
     if (!container) return;
 
-    const optionsHTML = ACHAR_PRODUCTS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-
+    // Initial HTML structure. Options will be populated via JS.
     container.innerHTML = `
         <div class="card-modern p-6 md:p-8 bg-gradient-subtle border-primary/50">
             <h3 class="text-2xl font-bold text-gradient mb-2 text-center">আচার কম্বো অফার!</h3>
             <p class="text-muted-foreground mb-6 text-center">আপনার পছন্দের যেকোন দুইটি আচার একসাথে নিন মাত্র ৳৯০০ টাকায়, সাথে ডেলিভারি চার্জ সম্পূর্ণ ফ্রি!</p>
-            
             <div class="flex justify-center items-center gap-4 mb-6">
                 <img id="achar1-img" src="" alt="প্রথম আচার" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-md border-2 border-border transition-all duration-300">
                 <span class="text-2xl font-bold text-muted-foreground">+</span>
                 <img id="achar2-img" src="" alt="দ্বিতীয় আচার" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-md border-2 border-border transition-all duration-300">
             </div>
-
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
                     <label for="achar1" class="block text-sm font-medium mb-1">প্রথম আচার</label>
-                    <select id="achar1" class="w-full p-2 border rounded-md bg-input">${optionsHTML}</select>
+                    <select id="achar1" class="w-full p-2 border rounded-md bg-input"></select>
                 </div>
                 <div>
                     <label for="achar2" class="block text-sm font-medium mb-1">দ্বিতীয় আচার</label>
@@ -182,28 +179,36 @@ function renderComboCreator() {
     const achar1Img = document.getElementById('achar1-img');
     const achar2Img = document.getElementById('achar2-img');
 
-    function updateAcharComboUI() {
-        const selectedAchar1Id = achar1Select.value;
-        
-        // Update second dropdown options
-        const filteredOptions = ACHAR_PRODUCTS.filter(p => p.id !== selectedAchar1Id);
-        achar2Select.innerHTML = filteredOptions.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-        
-        const selectedAchar2Id = achar2Select.value;
-        
-        // Update images
-        const product1 = ACHAR_PRODUCTS.find(p => p.id === selectedAchar1Id);
-        const product2 = ACHAR_PRODUCTS.find(p => p.id === selectedAchar2Id);
-        
+    function updateImages() {
+        const product1 = ACHAR_PRODUCTS.find(p => p.id === achar1Select.value);
+        const product2 = ACHAR_PRODUCTS.find(p => p.id === achar2Select.value);
         if (product1) achar1Img.src = product1.image;
         if (product2) achar2Img.src = product2.image;
     }
 
-    achar1Select.addEventListener('change', updateAcharComboUI);
-    achar2Select.addEventListener('change', updateAcharComboUI);
+    function syncDropdowns() {
+        const selectedAchar1Id = achar1Select.value;
+        let currentAchar2Id = achar2Select.value;
+
+        if (selectedAchar1Id === currentAchar2Id) {
+            const nextAvailable = ACHAR_PRODUCTS.find(p => p.id !== selectedAchar1Id);
+            if (nextAvailable) currentAchar2Id = nextAvailable.id;
+        }
+        
+        achar2Select.innerHTML = ACHAR_PRODUCTS
+            .filter(p => p.id !== selectedAchar1Id)
+            .map(p => `<option value="${p.id}" ${p.id === currentAchar2Id ? 'selected' : ''}>${p.name}</option>`)
+            .join('');
+        
+        updateImages();
+    }
+
+    achar1Select.addEventListener('change', syncDropdowns);
+    achar2Select.addEventListener('change', updateImages);
     
     // Initial setup
-    updateAcharComboUI();
+    achar1Select.innerHTML = ACHAR_PRODUCTS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+    syncDropdowns(); // Run once to populate the second dropdown and set initial images
 }
 
 
