@@ -38,9 +38,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="min-h-screen bg-background relative overflow-x-hidden font-hind">
+  
+  <div id="preloader">
+    <img src="assets/logo_3.webp" alt="সবকিছু.com Logo Loading" />
+  </div>
   <div class="fixed inset-0 opacity-5 pointer-events-none bg-dots-pattern"></div>
+  
   <div id="app-root">
-    <header id="main-header" class="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-elegant">
+    <header id="main-header" class="sticky top-0 z-50 bg-card/95 border-b border-border shadow-elegant">
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-20">
           <a href="index.html" class="flex items-center gap-3">
@@ -53,7 +58,9 @@
           <div class="flex items-center gap-2">
             <nav class="hidden lg:flex items-center gap-6">
               <a href="index.html" class="nav-link">হোম</a>
-              <a href="about.html" class="nav-link">আমাদের সম্পর্কে</a>
+              <a href="index.html#products-section" class="nav-link">পণ্যসমূহ</a>
+              <a href="index.html#offers-section" class="nav-link">বিশেষ অফার</a>
+              <a href="reviews.html" class="nav-link">রিভিউ</a>
               <a href="contact.html" class="nav-link">যোগাযোগ</a>
             </nav>
             <button id="cart-btn" class="relative p-2 rounded-full hover:bg-accent hover:text-primary transition-colors">
@@ -92,7 +99,16 @@
                                 <div class="space-y-2"><label for="thana" class="text-sm font-medium">থানা/উপজেলা *</label><select name="thana" required class="w-full p-2 border rounded-md bg-input" disabled><option value="" disabled selected>আগে জেলা নির্বাচন করুন</option></select></div>
                             </div>
                             <div class="space-y-2"><label for="address" class="text-sm font-medium">বিস্তারিত ঠিকানা *</label><input type="text" id="address" name="address" required placeholder="বাড়ির নম্বর, রাস্তা, এলাকা/গ্রাম" class="w-full p-2 border rounded-md bg-input" /></div>
-                            <button type="submit" class="w-full btn-primary text-lg py-3 rounded-md mt-6">অর্ডার কনফার্ম করুন</button>
+                            
+                            <button type="submit" class="w-full btn-primary text-lg py-3 rounded-md mt-6">
+                                <span class="btn-text">অর্ডার কনফার্ম করুন</span>
+                                <div class="truck-animation">
+                                    <div class="road-lines"></div>
+                                    <svg class="truck-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path d="M499.23 337.811c0 27.618-22.383 50-50 50s-50-22.382-50-50 22.383-50 50-50 50 22.382 50 50zM112.77 337.811c0 27.618-22.383 50-50 50s-50-22.382-50-50 22.383-50 50-50 50 22.382 50 50zM504.254 204.625l-74.5-69.875C422.396 128.082 413.25 124 404 124h-44V44c0-24.301-19.699-44-44-44H44C19.699 0 0 19.699 0 44v299.113c0 13.921 11.314 25.234 25.234 25.234h12.532c5.586 23.362 27.568 40.653 54.999 40.653s49.414-17.291 54.999-40.653h148.698c5.586 23.362 27.568 40.653 54.999 40.653s49.414-17.291 54.999-40.653h12.532c13.921 0 25.234-11.314 25.234-25.234V228c0-8.216-4.223-15.908-11.246-20.375zM316 124h68l56 52h-56v-52zM128 284v-40h128v40H128z"/>
+                                    </svg>
+                                </div>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -104,10 +120,44 @@
         </div>
     </main>
 
-    <footer class="bg-card/95 backdrop-blur-md py-12 border-t border-border mt-16">
-        <div class="container mx-auto px-4 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 সবকিছু.com. সকল অধিকার সংরক্ষিত।</p>
+    <footer class="main-footer bg-card/95">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">আমাদের সম্পর্কে</h4>
+            <p class="text-muted-foreground text-sm">
+              সবকিছু.com আপনাকে সেরা অনলাইন শপিংয়ের অভিজ্ঞতা দিতে প্রতিশ্রুতিবদ্ধ।
+            </p>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">গুরুত্বপূর্ণ লিংক</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="index.html" class="footer-link">হোম</a></li>
+              <li><a href="index.html#products-section" class="footer-link">পণ্যসমূহ</a></li>
+              <li><a href="about.html" class="footer-link">আমাদের সম্পর্কে</a></li>
+              <li><a href="contact.html" class="footer-link">যোগাযোগ</a></li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">যোগাযোগ</h4>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3"><span class="text-primary">📧</span><a href="mailto:shobkichuofficial@gmail.com" class="footer-link">shobkichuofficial@gmail.com</a></div>
+              <div class="flex items-center gap-3"><span class="text-primary">📍</span><span class="text-muted-foreground">বাংলাদেশ</span></div>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">সোশ্যাল মিডিয়া</h4>
+            <div class="flex items-center gap-4">
+              <a href="https://www.facebook.com/share/16sSjnvbCa/" target="_blank" class="social-icon">F</a>
+              <a href="https://www.instagram.com/shobkichuofficial/" target="_blank" class="social-icon">I</a>
+              <a href="#" target="_blank" class="social-icon">Y</a>
+            </div>
+          </div>
         </div>
+        <div class="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <p>&copy; 2024 সবকিছু.com. সকল অধিকার সংরক্ষিত।</p>
+        </div>
+      </div>
     </footer>
   </div>
 

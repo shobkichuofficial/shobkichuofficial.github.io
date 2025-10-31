@@ -24,6 +24,7 @@ const PRODUCTS = [
 
 const ACHAR_PRODUCTS = PRODUCTS.filter(p => p.id.startsWith("achar_"));
 const BALACHAO_PRODUCTS = PRODUCTS.filter(p => p.id.startsWith("balachao_"));
+const FREE_DELIVERY_PRODUCTS = PRODUCTS.filter(p => p.freeDelivery);
 
 // --- Review Data ---
 const REVIEWS = [
@@ -99,6 +100,43 @@ async function submitToGoogleSheet(formData) {
     }
 }
 
+// --- NEW TAB LOGIC ---
+function initializeTabs(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    const tabButtons = container.querySelectorAll('.tab-button');
+    const tabContents = container.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.dataset.tab; // e.g., "balachao"
+            
+            // Deactivate all buttons and content within this container
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Activate the clicked button
+            button.classList.add('active');
+            
+            // Activate the corresponding content
+            const activeContent = container.querySelector(`.tab-content[data-tab="${tabId}"]`);
+            if (activeContent) {
+                activeContent.classList.add('active');
+            }
+        });
+    });
+    
+    // Activate the first tab by default
+    if (tabButtons.length > 0) {
+        tabButtons[0].classList.add('active');
+    }
+    if (tabContents.length > 0) {
+        tabContents[0].classList.add('active');
+    }
+}
+
+
 // --- RENDER FUNCTIONS ---
 function renderProducts(productsToRender, gridElement) {
   if (!gridElement) return;
@@ -147,6 +185,7 @@ function renderReviews(reviewsToRender, gridElement) {
 }
 
 function renderComboCreator() {
+    // This function now finds its container inside the active tab
     const container = document.getElementById('combo-offer-creator');
     if (!container) return;
 
@@ -213,6 +252,7 @@ function renderComboCreator() {
 
 
 function renderBalachaoAcharCombo() {
+    // This function now finds its container inside the active tab
     const container = document.getElementById('balachao-achar-combo-creator');
     if (!container) return;
 
@@ -283,7 +323,7 @@ function addToCart(productId) {
     const existing = CART.find(i => i.id === product.id);
     if (existing) {
         if(existing.quantity >= 20) {
-            showToast("সীমা অতিক্রম করেছে", "আপনি একটি পণ্যের সর্বোচ্চ ২০টি ইউনিট যোগ করতে পারেন।", "warning");
+            showToast("সীমা অতিক্রম করেছে", " আপনি একটি পণ্যের সর্বোচ্চ ২০টি ইউনিট যোগ করতে পারেন।", "warning");
             return;
         }
         if (existing.quantity >= product.stock) {
@@ -305,6 +345,8 @@ function orderNow(productId) {
         showToast("স্টক নেই", "এই পণ্যটি কেনা সম্ভব নয় কারণ এটি স্টক আউট।", "destructive");
         return;
     }
+
+    // No modal here, just redirect to checkout
     const itemForCheckout = [{ ...product, quantity: 1 }];
     localStorage.setItem('shobkichuCheckout', JSON.stringify(itemForCheckout));
     window.location.href = 'checkout.html';
@@ -327,11 +369,12 @@ function orderAcharCombo() {
         name: `আচার কম্বো (${p1.name_en} + ${p2.name_en})`,
         price: 900,
         quantity: 1,
-        image: 'assets/achar_mixed.webp', // Updated from .jpg to .webp
+        image: 'assets/achar_mixed.webp',
         freeDelivery: true,
         isCombo: true
     };
     
+    // No modal here, just redirect
     localStorage.setItem('shobkichuCheckout', JSON.stringify([comboItem]));
     window.location.href = 'checkout.html';
 }
@@ -356,11 +399,12 @@ function orderBalachaoAcharCombo() {
         name: `বালাচাও-আচার কম্বো (${balachaoProduct.name_en} + ${acharProduct.name_en})`,
         price: totalPrice,
         quantity: 1,
-        image: balachaoProduct.image, // Uses product.image which is already .webp
+        image: balachaoProduct.image,
         freeDelivery: true,
         isCombo: true
     };
     
+    // No modal here, just redirect
     localStorage.setItem('shobkichuCheckout', JSON.stringify([comboItem]));
     window.location.href = 'checkout.html';
 }
@@ -375,12 +419,19 @@ function goToCheckout() {
     window.location.href = 'checkout.html';
 }
 
-// --- Search Logic ---
+// --- Search Logic (UPDATED) ---
 function handleSearch(event) {
     const searchTerm = event.target.value.trim();
     const { 
-        searchBar, mobileSearchBar, heroSection, productsSection, productGrid, 
-        offerGrid, offersSection, faqSection, searchNoResultsEl
+        searchBar, mobileSearchBar, heroSection, 
+        // Tabbed Sections
+        offersSection, productsSection,
+        // Search Sections
+        searchResultsSection, searchResultsGrid,
+        // Other sections
+        faqSection, searchNoResultsEl,
+        // Previews
+        aboutPreviewSection, partnersPreviewSection, reviewsPreviewSection, contactPreviewSection
     } = DOM_REFERENCES;
     
     if (searchBar && mobileSearchBar) {
@@ -390,19 +441,24 @@ function handleSearch(event) {
 
     const isSearchActive = searchTerm !== '';
 
+    // Toggle static sections vs search sections
     if (heroSection) heroSection.style.display = isSearchActive ? 'none' : 'flex';
     if (faqSection) faqSection.style.display = isSearchActive ? 'none' : 'block';
-    
-    if (!isSearchActive) {
-        if (offersSection) offersSection.style.display = 'block';
-        if (productsSection) productsSection.style.display = 'block';
-        if (searchNoResultsEl) searchNoResultsEl.classList.add('hidden');
+    if (offersSection) offersSection.style.display = isSearchActive ? 'none' : 'block';
+    if (productsSection) productsSection.style.display = isSearchActive ? 'none' : 'block';
+    if (aboutPreviewSection) aboutPreviewSection.style.display = isSearchActive ? 'none' : 'block';
+    if (partnersPreviewSection) partnersPreviewSection.style.display = isSearchActive ? 'none' : 'block';
+    if (reviewsPreviewSection) reviewsPreviewSection.style.display = isSearchActive ? 'none' : 'block';
+    if (contactPreviewSection) contactPreviewSection.style.display = isSearchActive ? 'none' : 'block';
 
-        renderProducts(PRODUCTS.filter(p => p.freeDelivery), offerGrid);
-        renderProducts(PRODUCTS, productGrid);
+
+    if (!isSearchActive) {
+        if (searchResultsSection) searchResultsSection.style.display = 'none'; // Hide search results section
+        if (searchNoResultsEl) searchNoResultsEl.classList.add('hidden');
         return;
     }
     
+    // --- Search is Active ---
     const filteredProducts = PRODUCTS.filter(p => 
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -410,20 +466,14 @@ function handleSearch(event) {
     );
 
     if (filteredProducts.length === 0) {
-        if (offersSection) offersSection.style.display = 'none';
-        if (productsSection) productsSection.style.display = 'none';
-        if (searchNoResultsEl) searchNoResultsEl.classList.remove('hidden');
+        if (searchResultsSection) searchResultsSection.style.display = 'none'; // Hide search results section
+        if (searchNoResultsEl) searchNoResultsEl.classList.remove('hidden'); // Show no results message
     } else {
-        if (searchNoResultsEl) searchNoResultsEl.classList.add('hidden');
-
-        const offerProducts = filteredProducts.filter(p => p.freeDelivery);
-        const regularProducts = filteredProducts;
-
-        if (offersSection) offersSection.style.display = offerProducts.length > 0 ? 'block' : 'none';
-        if (productsSection) productsSection.style.display = regularProducts.length > 0 ? 'block' : 'none';
-
-        renderProducts(offerProducts, offerGrid);
-        renderProducts(regularProducts, productGrid);
+        if (searchNoResultsEl) searchNoResultsEl.classList.add('hidden'); // Hide no results message
+        if (searchResultsSection) searchResultsSection.style.display = 'block'; // Show search results section
+        
+        // Render filtered products into the search grid
+        renderProducts(filteredProducts, searchResultsGrid); 
     }
 }
 
@@ -439,8 +489,30 @@ function updateTheme() {
 
 // --- Page Initializers ---
 function initializeHomepage() {
-    DOM_REFERENCES.productGrid = document.getElementById('product-grid');
-    DOM_REFERENCES.offerGrid = document.getElementById('offer-grid');
+    // --- Grids for Tabbed Sections ---
+    DOM_REFERENCES.offerTabBalachaoGrid = document.getElementById('offer-tab-balachao-grid');
+    DOM_REFERENCES.offerTabComboContainer = document.getElementById('offer-tab-combo');
+    DOM_REFERENCES.productsTabBalachaoGrid = document.getElementById('products-tab-balachao-grid');
+    DOM_REFERENCES.productsTabAcharGrid = document.getElementById('products-tab-achar-grid');
+    
+    // --- Grid for Search Results ---
+    DOM_REFERENCES.searchResultsGrid = document.getElementById('search-results-grid'); 
+
+    // --- Page Sections ---
+    DOM_REFERENCES.heroSection = document.getElementById('home');
+    DOM_REFERENCES.offersSection = document.getElementById('offers-section');
+    DOM_REFERENCES.productsSection = document.getElementById('products-section');
+    DOM_REFERENCES.searchResultsSection = document.getElementById('search-results-section');
+    DOM_REFERENCES.faqSection = document.getElementById('faq');
+    DOM_REFERENCES.searchNoResultsEl = document.getElementById('search-no-results');
+    
+    // Preview Sections (for hiding during search)
+    DOM_REFERENCES.aboutPreviewSection = document.getElementById('about-preview');
+    DOM_REFERENCES.partnersPreviewSection = document.getElementById('partners-preview');
+    DOM_REFERENCES.reviewsPreviewSection = document.getElementById('reviews-preview');
+    DOM_REFERENCES.contactPreviewSection = document.getElementById('contact-preview');
+
+    // --- Other UI ---
     DOM_REFERENCES.reviewGrid = document.getElementById('review-grid-preview');
     DOM_REFERENCES.mobileMenuBtn = document.getElementById('mobile-menu-btn');
     DOM_REFERENCES.mobileMenu = document.getElementById('mobile-menu');
@@ -448,30 +520,50 @@ function initializeHomepage() {
     DOM_REFERENCES.mobileSearchBar = document.getElementById('mobile-search-bar');
     DOM_REFERENCES.desktopSearchIcon = document.getElementById('desktop-search-icon');
     DOM_REFERENCES.desktopSearchContainer = document.getElementById('desktop-search-container');
-    DOM_REFERENCES.heroSection = document.getElementById('home');
-    DOM_REFERENCES.productsSection = document.getElementById('products');
-    DOM_REFERENCES.offersSection = document.getElementById('offers');
-    DOM_REFERENCES.faqSection = document.getElementById('faq');
-    DOM_REFERENCES.searchNoResultsEl = document.getElementById('search-no-results');
     
-    renderProducts(PRODUCTS, DOM_REFERENCES.productGrid);
-    renderProducts(PRODUCTS.filter(p => p.freeDelivery), DOM_REFERENCES.offerGrid);
-    renderComboCreator();
-    renderBalachaoAcharCombo();
+    // --- Initialize Tabs ---
+    initializeTabs('offers-section');
+    initializeTabs('products-section');
+
+    // --- Render Content into Tabs ---
+    // Offers Tab 1: Free Delivery Balachao
+    renderProducts(FREE_DELIVERY_PRODUCTS, DOM_REFERENCES.offerTabBalachaoGrid);
+    
+    // Offers Tab 2: Combo Creators
+    if (DOM_REFERENCES.offerTabComboContainer) {
+        renderComboCreator(); // Finds 'combo-offer-creator'
+        renderBalachaoAcharCombo(); // Finds 'balachao-achar-combo-creator'
+    }
+    
+    // Products Tab 1: All Balachao
+    renderProducts(BALACHAO_PRODUCTS, DOM_REFERENCES.productsTabBalachaoGrid);
+    
+    // Products Tab 2: All Achar
+    renderProducts(ACHAR_PRODUCTS, DOM_REFERENCES.productsTabAcharGrid);
+
+    // Render Homepage Reviews
     if(DOM_REFERENCES.reviewGrid) renderReviews(REVIEWS.slice(0, 3), DOM_REFERENCES.reviewGrid);
     
-    DOM_REFERENCES.searchBar.addEventListener('input', handleSearch);
-    DOM_REFERENCES.mobileSearchBar.addEventListener('input', handleSearch);
-    DOM_REFERENCES.mobileMenuBtn.addEventListener('click', () => DOM_REFERENCES.mobileMenu.classList.toggle('hidden'));
+    // Hide search results section by default
+    if (DOM_REFERENCES.searchResultsSection) {
+        DOM_REFERENCES.searchResultsSection.style.display = 'none';
+    }
+
+    // --- Add Event Listeners ---
+    if (DOM_REFERENCES.searchBar) DOM_REFERENCES.searchBar.addEventListener('input', handleSearch);
+    if (DOM_REFERENCES.mobileSearchBar) DOM_REFERENCES.mobileSearchBar.addEventListener('input', handleSearch);
+    if (DOM_REFERENCES.mobileMenuBtn) DOM_REFERENCES.mobileMenuBtn.addEventListener('click', () => DOM_REFERENCES.mobileMenu.classList.toggle('hidden'));
     
-    DOM_REFERENCES.desktopSearchIcon.addEventListener('click', (event) => {
-        event.stopPropagation();
-        const { desktopSearchContainer, desktopSearchIcon, searchBar } = DOM_REFERENCES;
-        desktopSearchContainer.classList.remove('scale-x-0', 'opacity-0');
-        desktopSearchContainer.classList.add('scale-x-100', 'opacity-100');
-        desktopSearchIcon.classList.add('opacity-0', 'pointer-events-none');
-        searchBar.focus();
-    });
+    if (DOM_REFERENCES.desktopSearchIcon) {
+        DOM_REFERENCES.desktopSearchIcon.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const { desktopSearchContainer, desktopSearchIcon, searchBar } = DOM_REFERENCES;
+            desktopSearchContainer.classList.remove('scale-x-0', 'opacity-0');
+            desktopSearchContainer.classList.add('scale-x-100', 'opacity-100');
+            desktopSearchIcon.classList.add('opacity-0', 'pointer-events-none');
+            searchBar.focus();
+        });
+    }
 
     document.addEventListener('click', (event) => {
         const { desktopSearchContainer, desktopSearchIcon, searchBar } = DOM_REFERENCES;
@@ -563,183 +655,195 @@ function initializeCheckoutPage() {
 
     const orderSummaryEl = document.getElementById('order-summary');
     const checkoutForm = document.getElementById('checkout-form');
-    const divisionSelect = checkoutForm.division;
-    divisionSelect.innerHTML = '<option value="" disabled selected>বিভাগ নির্বাচন করুন</option>';
-    for (const division in DIVISIONS_AND_DISTRICTS) {
-        divisionSelect.innerHTML += `<option value="${division}">${division}</option>`;
-    }
-
-    window.removeFromCart = function(productId) {
-        items = items.filter(i => i.id !== productId);
-        CART = CART.filter(item => item.id !== productId);
-        saveCartToStorage();
-        localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
-        renderSummary();
-        updateCartCount();
-        if (items.length === 0) {
-            container.innerHTML = `<div class="text-center py-20 card-modern"><h2 class="text-2xl font-bold">আপনার কার্ট খালি</h2><p class="text-muted-foreground mt-2">অর্ডার করার জন্য কোনো পণ্য নির্বাচন করা হয়নি।</p><a href="index.html" class="btn-primary mt-6 inline-block px-6 py-2">কেনাকাটা শুরু করুন</a></div>`;
+    
+    // Ensure form exists before accessing properties
+    if (checkoutForm) {
+        const divisionSelect = checkoutForm.division;
+        if(divisionSelect) { // Check if division select exists
+            divisionSelect.innerHTML = '<option value="" disabled selected>বিভাগ নির্বাচন করুন</option>';
+            for (const division in DIVISIONS_AND_DISTRICTS) {
+                divisionSelect.innerHTML += `<option value="${division}">${division}</option>`;
+            }
         }
-    }
 
-    window.increaseQuantity = function(productId) {
-        const product = PRODUCTS.find(p => p.id === productId);
-        let item = items.find(i => i.id === productId);
-
-        if (item && product) {
-            if (item.quantity >= product.stock) {
-                showToast("স্টক সীমিত", `দুঃখিত, এই পণ্যের মাত্র ${product.stock}টি ইউনিট স্টকে আছে।`, "warning");
-                return;
-            }
-            if (item.quantity >= 20) {
-                showToast("সীমা অতিক্রম করেছে", "আপনি একটি পণ্যের সর্বোচ্চ ২০টি ইউনিট যোগ করতে পারেন।", "warning");
-                return;
-            }
-            item.quantity++;
-            
-            let cartItem = CART.find(i => i.id === productId);
-            if(cartItem) cartItem.quantity = item.quantity;
-
+        window.removeFromCart = function(productId) {
+            items = items.filter(i => i.id !== productId);
+            CART = CART.filter(item => item.id !== productId);
             saveCartToStorage();
             localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
-            renderSummary();
+            renderSummary(); // Re-render summary
             updateCartCount();
+            if (items.length === 0) {
+                container.innerHTML = `<div class="text-center py-20 card-modern"><h2 class="text-2xl font-bold">আপনার কার্ট খালি</h2><p class="text-muted-foreground mt-2">অর্ডার করার জন্য কোনো পণ্য নির্বাচন করা হয়নি।</p><a href="index.html" class="btn-primary mt-6 inline-block px-6 py-2">কেনাকাটা শুরু করুন</a></div>`;
+            }
         }
-    }
 
-    window.decreaseQuantity = function(productId) {
-        let item = items.find(i => i.id === productId);
-        if (item) {
-            item.quantity--;
-            if (item.quantity < 1) {
-                removeFromCart(productId);
-            } else {
+        window.increaseQuantity = function(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            let item = items.find(i => i.id === productId);
+
+            if (item && product) {
+                if (item.quantity >= product.stock) {
+                    showToast("স্টক সীমিত", `দুঃখিত, এই পণ্যের মাত্র ${product.stock}টি ইউনিট স্টকে আছে।`, "warning");
+                    return;
+                }
+                if (item.quantity >= 20) {
+                    showToast("সীমা অতিক্রম করেছে", "আপনি একটি পণ্যের সর্বোচ্চ ২০টি ইউনিট যোগ করতে পারেন।", "warning");
+                    return;
+                }
+                item.quantity++;
+                
                 let cartItem = CART.find(i => i.id === productId);
                 if(cartItem) cartItem.quantity = item.quantity;
-                
+
                 saveCartToStorage();
                 localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
                 renderSummary();
                 updateCartCount();
             }
         }
-    }
 
-    function renderSummary() {
-        if (!orderSummaryEl) return;
-        const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const isFreeDeliveryApplicable = items.every(item => item.freeDelivery);
-        const selectedDistrict = checkoutForm.district.value;
-        let deliveryCharge = 0;
-
-        if (!isFreeDeliveryApplicable) {
-            deliveryCharge = SHIPPING_CHARGES[selectedDistrict] || (selectedDistrict ? SHIPPING_CHARGES["অন্যান্য"] : 0);
+        window.decreaseQuantity = function(productId) {
+            let item = items.find(i => i.id === productId);
+            if (item) {
+                item.quantity--;
+                if (item.quantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    let cartItem = CART.find(i => i.id === productId);
+                    if(cartItem) cartItem.quantity = item.quantity;
+                    
+                    saveCartToStorage();
+                    localStorage.setItem('shobkichuCheckout', JSON.stringify(items));
+                    renderSummary();
+                    updateCartCount();
+                }
+            }
         }
-        
-        const total = subtotal + deliveryCharge;
-        orderSummaryEl.innerHTML = `
-            <h3 class="text-2xl font-bold text-gradient mb-6">অর্ডার সারাংশ</h3>
-            <div class="space-y-4 mb-6">
-                ${items.map(item => `
-                    <div class="flex items-center gap-4">
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover border border-border">
-                        <div class="flex-1">
-                            <h4 class="font-semibold text-foreground">${item.name}</h4>
-                            <div class="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                                <span>পরিমাণ:</span>
-                                <div class="flex items-center border rounded-md">
-                                    <button type="button" onclick="decreaseQuantity('${item.id}')" class="w-7 h-7 flex items-center justify-center hover:bg-accent transition-colors rounded-l-md">-</button>
-                                    <span class="w-8 text-center">${item.quantity}</span>
-                                    <button type="button" onclick="increaseQuantity('${item.id}')" class="w-7 h-7 flex items-center justify-center hover:bg-accent transition-colors rounded-r-md">+</button>
+
+        function renderSummary() {
+            if (!orderSummaryEl) return;
+            const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const isFreeDeliveryApplicable = items.every(item => item.freeDelivery);
+            const selectedDistrict = checkoutForm.district.value;
+            let deliveryCharge = 0;
+
+            if (!isFreeDeliveryApplicable) {
+                deliveryCharge = SHIPPING_CHARGES[selectedDistrict] || (selectedDistrict ? SHIPPING_CHARGES["অন্যান্য"] : 0);
+            }
+            
+            const total = subtotal + deliveryCharge;
+            orderSummaryEl.innerHTML = `
+                <h3 class="text-2xl font-bold text-gradient mb-6">অর্ডার সারাংশ</h3>
+                <div class="space-y-4 mb-6">
+                    ${items.map(item => `
+                        <div class="flex items-center gap-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover border border-border">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-foreground">${item.name}</h4>
+                                <div class="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                                    <span>পরিমাণ:</span>
+                                    <div class="flex items-center border rounded-md">
+                                        <button type="button" onclick="decreaseQuantity('${item.id}')" class="w-7 h-7 flex items-center justify-center hover:bg-accent transition-colors rounded-l-md">-</button>
+                                        <span class="w-8 text-center">${item.quantity}</span>
+                                        <button type="button" onclick="increaseQuantity('${item.id}')" class="w-7 h-7 flex items-center justify-center hover:bg-accent transition-colors rounded-r-md">+</button>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="text-right">
+                                <span class="font-semibold text-foreground">৳${item.price * item.quantity}</span>
+                                <button onclick="removeFromCart('${item.id}')" class="text-xs text-destructive hover:underline ml-2 mt-1 block">মুছুন</button>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <span class="font-semibold text-foreground">৳${item.price * item.quantity}</span>
-                            <button onclick="removeFromCart('${item.id}')" class="text-xs text-destructive hover:underline ml-2 mt-1 block">মুছুন</button>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="space-y-3 pt-4 border-t border-border">
-                <div class="flex justify-between text-muted-foreground"><span>সাব-টোটাল</span><span class="font-medium">৳${subtotal}</span></div>
-                <div class="flex justify-between text-muted-foreground"><span>ডেলিভারি চার্জ</span><span class="font-medium">${deliveryCharge === 0 ? (isFreeDeliveryApplicable ? 'ফ্রি' : 'জেলা নির্বাচন করুন') : `৳${deliveryCharge}`}</span></div>
-                <div class="flex justify-between font-bold text-lg text-foreground pt-2 border-t border-border"><span>মোট</span><span>৳${total}</span></div>
-            </div>`;
-    }
+                    `).join('')}
+                </div>
+                <div class="space-y-3 pt-4 border-t border-border">
+                    <div class="flex justify-between text-muted-foreground"><span>সাব-টোটাল</span><span class="font-medium">৳${subtotal}</span></div>
+                    <div class="flex justify-between text-muted-foreground"><span>ডেলিভারি চার্জ</span><span class="font-medium">${deliveryCharge === 0 ? (isFreeDeliveryApplicable ? 'ফ্রি' : 'জেলা নির্বাচন করুন') : `৳${deliveryCharge}`}</span></div>
+                    <div class="flex justify-between font-bold text-lg text-foreground pt-2 border-t border-border"><span>মোট</span><span>৳${total}</span></div>
+                </div>`;
+        }
 
-    checkoutForm.addEventListener('change', e => {
-        if (e.target.name === 'division' || e.target.name === 'district') {
-            const division = checkoutForm.division.value;
-            const districtSelect = checkoutForm.district;
-            const thanaSelect = checkoutForm.thana;
-            if (e.target.name === 'division') {
-                districtSelect.innerHTML = '<option value="" disabled selected>জেলা নির্বাচন করুন</option>';
-                thanaSelect.innerHTML = '<option value="" disabled selected>আগে জেলা নির্বাচন করুন</option>';
-                thanaSelect.disabled = true;
-                if (division) {
-                    DIVISIONS_AND_DISTRICTS[division].forEach(d => districtSelect.innerHTML += `<option value="${d}">${d}</option>`);
-                    districtSelect.disabled = false;
+        checkoutForm.addEventListener('change', e => {
+            if (e.target.name === 'division' || e.target.name === 'district') {
+                const division = checkoutForm.division.value;
+                const districtSelect = checkoutForm.district;
+                const thanaSelect = checkoutForm.thana;
+                if (e.target.name === 'division') {
+                    districtSelect.innerHTML = '<option value="" disabled selected>জেলা নির্বাচন করুন</option>';
+                    thanaSelect.innerHTML = '<option value="" disabled selected>আগে জেলা নির্বাচন করুন</option>';
+                    thanaSelect.disabled = true;
+                    if (division && DIVISIONS_AND_DISTRICTS[division]) {
+                        DIVISIONS_AND_DISTRICTS[division].forEach(d => districtSelect.innerHTML += `<option value="${d}">${d}</option>`);
+                        districtSelect.disabled = false;
+                    }
+                } else {
+                    const district = districtSelect.value;
+                    thanaSelect.innerHTML = '<option value="" disabled selected>থানা/উপজেলা নির্বাচন করুন</option>';
+                    if (district && DISTRICTS_AND_THANAS[district]) {
+                        DISTRICTS_AND_THANAS[district].forEach(t => thanaSelect.innerHTML += `<option value="${t}">${t}</option>`);
+                        thanaSelect.disabled = false;
+                    }
                 }
-            } else {
-                const district = districtSelect.value;
-                thanaSelect.innerHTML = '<option value="" disabled selected>থানা/উপজেলা নির্বাচন করুন</option>';
-                if (district) {
-                    DISTRICTS_AND_THANAS[district].forEach(t => thanaSelect.innerHTML += `<option value="${t}">${t}</option>`);
-                    thanaSelect.disabled = false;
-                }
+                renderSummary();
             }
-            renderSummary();
-        }
-    });
+        });
 
-    checkoutForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = checkoutForm.querySelector('button[type="submit"]');
-        if (!checkoutForm.checkValidity()) {
-            showToast("ত্রুটি", "দয়া করে ফর্মের সমস্ত তথ্য সঠিকভাবে পূরণ করুন।", "destructive");
-            checkoutForm.reportValidity();
-            return;
-        }
+        checkoutForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = checkoutForm.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text'); // Target the text span
+            
+            if (!checkoutForm.checkValidity()) {
+                showToast("ত্রুটি", "দয়া করে ফর্মের সমস্ত তথ্য সঠিকভাবে পূরণ করুন।", "destructive");
+                checkoutForm.reportValidity();
+                return;
+            }
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'প্রসেসিং...';
-        
-        const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const isFreeDeliveryApplicable = items.every(item => item.freeDelivery);
-        let deliveryCharge = 0;
-        if (!isFreeDeliveryApplicable) {
-            const selectedDistrict = checkoutForm.district.value;
-            deliveryCharge = SHIPPING_CHARGES[selectedDistrict] || SHIPPING_CHARGES["অন্যান্য"];
-        }
-        const total = subtotal + deliveryCharge;
-        const fullAddress = `${checkoutForm.address.value}, থানা: ${checkoutForm.thana.value}, জেলা: ${checkoutForm.district.value}, বিভাগ: ${checkoutForm.division.value}`;
-        
-        const orderDetailsForConfirmation = { customerName: checkoutForm.customerName.value, phoneNumber: checkoutForm.phoneNumber.value, fullAddress, items, subtotal, deliveryCharge, total };
-        
-        const success = await submitToGoogleSheet({
-            customerName: checkoutForm.customerName.value,
-            phoneNumber: checkoutForm.phoneNumber.value,
-            address: fullAddress,
-            deliveryLocation: checkoutForm.district.value,
-            items: items.map(item => `${item.name} (x${item.quantity})`).join(', '),
-            totalAmount: total
+            // Start loading animation
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading'); // This will show the spinner
+            if (btnText) btnText.textContent = 'প্রসেসিং...'; // Change text
+            
+            const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const isFreeDeliveryApplicable = items.every(item => item.freeDelivery);
+            let deliveryCharge = 0;
+            if (!isFreeDeliveryApplicable) {
+                const selectedDistrict = checkoutForm.district.value;
+                deliveryCharge = SHIPPING_CHARGES[selectedDistrict] || SHIPPING_CHARGES["অন্যান্য"];
+            }
+            const total = subtotal + deliveryCharge;
+            const fullAddress = `${checkoutForm.address.value}, থানা: ${checkoutForm.thana.value}, জেলা: ${checkoutForm.district.value}, বিভাগ: ${checkoutForm.division.value}`;
+            
+            const orderDetailsForConfirmation = { customerName: checkoutForm.customerName.value, phoneNumber: checkoutForm.phoneNumber.value, fullAddress, items, subtotal, deliveryCharge, total };
+            
+            const success = await submitToGoogleSheet({
+                customerName: checkoutForm.customerName.value,
+                phoneNumber: checkoutForm.phoneNumber.value,
+                address: fullAddress,
+                deliveryLocation: checkoutForm.district.value,
+                items: items.map(item => `${item.name} (x${item.quantity})`).join(', '),
+                totalAmount: total
+            });
+            
+            if (success) {
+                localStorage.setItem('shobkichuOrderConfirmation', JSON.stringify(orderDetailsForConfirmation));
+                if (JSON.stringify(CART) === JSON.stringify(items)) {
+                    CART = [];
+                    saveCartToStorage();
+                }
+                localStorage.removeItem('shobkichuCheckout');
+                window.location.href = 'thankyou.html';
+            } else {
+                // Stop loading animation on failure
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                if (btnText) btnText.textContent = 'অর্ডার কনফার্ম করুন';
+            }
         });
         
-        if (success) {
-            localStorage.setItem('shobkichuOrderConfirmation', JSON.stringify(orderDetailsForConfirmation));
-            if (JSON.stringify(CART) === JSON.stringify(items)) {
-                CART = [];
-                saveCartToStorage();
-            }
-            localStorage.removeItem('shobkichuCheckout');
-            window.location.href = 'thankyou.html';
-        } else {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'অর্ডার কনফার্ম করুন';
-        }
-    });
-    
-    renderSummary();
+        renderSummary();
+    }
 }
 
 function initializeThankYouPage() {
@@ -793,13 +897,39 @@ function initializeThankYouPage() {
 }
 
 
+// --- Preloader Logic (NEW & SIMPLIFIED) ---
+function initializePreloader() {
+    const preloader = document.getElementById('preloader');
+    
+    if (!preloader) {
+        // If no preloader exists, just show the page
+        document.body.classList.add('page-loaded');
+        return;
+    }
+
+    // Wait for all content (images, etc.) to load
+    window.onload = () => {
+        // Add class to fade out preloader
+        document.body.classList.add('page-loaded');
+        
+        // Remove preloader from DOM after animations finish (1s)
+        setTimeout(() => {
+            if (preloader) preloader.remove();
+        }, 1000); 
+    };
+}
+
+
 // --- GLOBAL INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
+    // --- !! START PRELOADADER FIRST !! ---
+    initializePreloader();
+    // ---------------------------------
+
     DOM_REFERENCES = {
         toastEl: document.getElementById('toast'),
         toastTitleEl: document.getElementById('toast-title'),
         toastDescriptionEl: document.getElementById('toast-description'),
-        // Header elements that might not be on every page
         cartBtn: document.getElementById('cart-btn'),
         cartItemCountEl: document.getElementById('cart-item-count'),
         themeToggleBtn: document.getElementById('theme-toggle-btn'),
@@ -830,7 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Page-specific initializers
-    if (document.getElementById('product-grid')) initializeHomepage();
+    if (document.getElementById('products-section')) initializeHomepage(); // Homepage check
     if (document.getElementById('product-details-container')) initializeProductPage();
     if (document.getElementById('review-grid-full')) initializeReviewPage();
     if (document.getElementById('checkout-container')) initializeCheckoutPage();

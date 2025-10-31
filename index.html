@@ -53,10 +53,13 @@
 </head>
 <body class="min-h-screen bg-background relative overflow-x-hidden font-hind">
   
+  <div id="preloader">
+    <img src="assets/logo_3.webp" alt="সবকিছু.com Logo Loading" />
+  </div>
   <div class="fixed inset-0 opacity-5 pointer-events-none bg-dots-pattern"></div>
   
   <div id="app-root">
-    <header id="main-header" class="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-elegant transition-all duration-300">
+    <header id="main-header" class="sticky top-0 z-50 bg-card/95 border-b border-border shadow-elegant transition-all duration-300">
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-20">
           <a href="index.html" class="flex items-center gap-3">
@@ -80,11 +83,9 @@
           <div class="flex items-center gap-2">
             <nav class="hidden lg:flex items-center gap-6">
               <a href="index.html" class="nav-link">হোম</a>
-              <a href="#products" class="nav-link">পণ্যসমূহ</a>
-              <a href="#offers" class="nav-link">বিশেষ অফার</a>
+              <a href="#products-section" class="nav-link">পণ্যসমূহ</a>
+              <a href="#offers-section" class="nav-link">বিশেষ অফার</a>
               <a href="reviews.html" class="nav-link">রিভিউ</a>
-              <a href="partners.html" class="nav-link">পার্টনার</a>
-              <a href="about.html" class="nav-link">আমাদের সম্পর্কে</a>
               <a href="contact.html" class="nav-link">যোগাযোগ</a>
             </nav>
             <button id="cart-btn" class="relative p-2 rounded-full hover:bg-accent hover:text-primary transition-colors">
@@ -109,11 +110,9 @@
           </div>
           <nav class="flex flex-col items-start gap-3 px-4">
             <a href="index.html" class="nav-link w-full">হোম</a>
-            <a href="#products" class="nav-link w-full">পণ্যসমূহ</a>
-            <a href="#offers" class="nav-link w-full">বিশেষ অফার</a>
+            <a href="#products-section" class="nav-link w-full">পণ্যসমূহ</a>
+            <a href="#offers-section" class="nav-link w-full">বিশেষ অফার</a>
             <a href="reviews.html" class="nav-link w-full">রিভিউ</a>
-            <a href="partners.html" class="nav-link w-full">পার্টনার</a>
-            <a href="about.html" class="nav-link w-full">আমাদের সম্পর্কে</a>
             <a href="contact.html" class="nav-link w-full">যোগাযোগ</a>
           </nav>
         </div>
@@ -129,35 +128,72 @@
           <h1 class="text-4xl md:text-6xl font-bold mb-2 text-shadow" style="animation: slide-up 0.4s ease-out;">সবকিছু.com</h1>
           <p class="text-xl md:text-2xl mb-8 text-shadow-subtle" style="animation: fade-in 0.5s ease-out;">এক ক্লিকে সবকিছু, আপনার দোরগোড়ায় 🛒</p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#offers" class="btn-primary text-lg font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">বিশেষ অফার দেখুন</a>
-            <a href="#products" class="btn-ghost text-lg font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">সকল পণ্য দেখুন</a>
+            <a href="#offers-section" class="btn-primary text-lg font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">বিশেষ অফার দেখুন</a>
+            <a href="#products-section" class="btn-ghost text-lg font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">সকল পণ্য দেখুন</a>
           </div>
         </div>
       </section>
 
-      <section id="offers" class="py-16 lg:py-24">
+      <section id="offers-section" class="py-16 lg:py-24">
         <div class="container mx-auto px-4">
           <div class="text-center mb-12">
             <span class="inline-block bg-destructive text-destructive-foreground mb-4 px-6 py-2 text-lg rounded-lg animate-pulse">⚡ বিশেষ অফার ⚡</span>
             <h2 class="text-4xl font-bold text-gradient">আমাদের স্পেশাল অফারসমূহ</h2>
-            <p class="text-muted-foreground mt-2">এই পণ্যগুলো এবং কম্বো অফারে পাচ্ছেন বিশেষ ছাড় ও ফ্রি ডেলিভারি।</p>
+            <p class="text-muted-foreground mt-2">ফ্রি ডেলিভারি এবং আকর্ষণীয় কম্বো অফার থেকে বেছে নিন আপনার পছন্দেরটি।</p>
           </div>
-          <div id="offer-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div class="tab-controls">
+            <button class="tab-button" data-tab="free-delivery">⚡ ফ্রি ডেলিভারি</button>
+            <button class="tab-button" data-tab="combos">🎁 কম্বো অফার</button>
+          </div>
+
+          <div class="tab-content" data-tab="free-delivery">
+            <div id="offer-tab-balachao-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              </div>
+          </div>
+
+          <div class="tab-content" data-tab="combos">
+            <div id="offer-tab-combo" class="space-y-8 max-w-3xl mx-auto">
+              <div id="combo-offer-creator">
+                </div>
+              <div id="balachao-achar-combo-creator">
+                </div>
             </div>
-          <div id="combo-offer-creator" class="mt-8 max-w-3xl mx-auto">
-            </div>
-          <div id="balachao-achar-combo-creator" class="mt-8 max-w-3xl mx-auto">
-            </div>
+          </div>
         </div>
       </section>
 
-      <section id="products" class="py-16 lg:py-24 bg-gradient-subtle">
+      <section id="products-section" class="py-16 lg:py-24 bg-gradient-subtle">
         <div class="container mx-auto px-4">
           <div class="text-center mb-12">
             <span class="inline-block bg-secondary text-secondary-foreground mb-4 px-6 py-2 text-lg rounded-lg">📦 আমাদের সকল পণ্য 📦</span>
             <h2 class="text-4xl font-bold text-gradient">আপনার পছন্দের সেরা সব পণ্য</h2>
           </div>
-          <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div class="tab-controls">
+            <button class="tab-button" data-tab="balachao">🦐 চিংড়ি বালাচাও</button>
+            <button class="tab-button" data-tab="achar">🌶️ আচারসমূহ</button>
+          </div>
+
+          <div class="tab-content" data-tab="balachao">
+            <div id="products-tab-balachao-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              </div>
+          </div>
+
+          <div class="tab-content" data-tab="achar">
+            <div id="products-tab-achar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="search-results-section" class="py-16 lg:py-24 bg-gradient-subtle">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <span class="inline-block bg-secondary text-secondary-foreground mb-4 px-6 py-2 text-lg rounded-lg">🔍 সার্চ রেজাল্ট 🔍</span>
+            <h2 class="text-4xl font-bold text-gradient">আপনার সার্চের ফলাফল</h2>
+          </div>
+          <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             </div>
         </div>
       </section>
@@ -213,7 +249,7 @@
             <h2 class="text-4xl font-bold text-gradient">আমাদের গ্রাহকরা যা বলেন</h2>
           </div>
           <div id="review-grid-preview" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-</div>
+            </div>
           <div class="text-center mt-12">
             <a href="reviews.html" class="btn-primary text-lg font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">সকল রিভিউ দেখুন</a>
           </div>
@@ -265,7 +301,7 @@
       </section>
     </main>
 
-    <footer class="bg-card/95 backdrop-blur-md py-12 border-t border-border mt-16">
+    <footer class="main-footer bg-card/95">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <div class="space-y-4">
@@ -278,7 +314,7 @@
             <h4 class="text-lg font-bold text-foreground">গুরুত্বপূর্ণ লিংক</h4>
             <ul class="space-y-2 text-sm">
               <li><a href="index.html" class="footer-link">হোম</a></li>
-              <li><a href="#products" class="footer-link">পণ্যসমূহ</a></li>
+              <li><a href="#products-section" class="footer-link">পণ্যসমূহ</a></li>
               <li><a href="about.html" class="footer-link">আমাদের সম্পর্কে</a></li>
               <li><a href="contact.html" class="footer-link">যোগাযোগ</a></li>
             </ul>

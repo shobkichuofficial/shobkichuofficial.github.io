@@ -42,38 +42,68 @@
 </head>
 <body class="min-h-screen bg-background relative overflow-x-hidden font-hind">
   
+  <div id="preloader">
+    <img src="assets/logo_3.webp" alt="সবকিছু.com Logo Loading" />
+  </div>
   <div class="fixed inset-0 opacity-5 pointer-events-none bg-dots-pattern"></div>
   
   <div id="app-root">
-    <header id="main-header" class="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-elegant">
+    <header id="main-header" class="sticky top-0 z-50 bg-card/95 border-b border-border shadow-elegant transition-all duration-300">
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-20">
-          <a href="index.html" class="flex items-center gap-3"> <img src="assets/logo_3.webp" alt="সবকিছু.com Logo" class="w-14 h-14 rounded-full shadow-elegant" />
+          <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/logo_3.webp" alt="সবকিছু.com Logo" class="w-14 h-14 rounded-full shadow-elegant" />
             <div class="hidden sm:block">
               <h1 class="text-2xl font-bold text-gradient">সবকিছু.com</h1>
               <p class="text-sm text-muted-foreground -mt-1">এক ক্লিকে সবকিছু।</p>
             </div>
           </a>
           
+          <div class="relative flex-1 hidden lg:flex justify-center px-8">
+            <button id="desktop-search-icon" class="p-2 rounded-full hover:bg-accent hover:text-primary transition-colors">
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <div id="desktop-search-container" class="absolute inset-y-0 w-full max-w-lg transition-all duration-300 transform scale-x-0 opacity-0 origin-center">
+              <input type="search" id="search-bar" placeholder="পণ্য খুঁজুন (e.g., balachao 500g)" class="w-full h-full pl-10 pr-4 border rounded-full bg-input text-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+          </div>
+
           <div class="flex items-center gap-2">
             <nav class="hidden lg:flex items-center gap-6">
               <a href="index.html" class="nav-link">হোম</a>
-              <a href="index.html#products" class="nav-link">পণ্যসমূহ</a>
-              <a href="index.html#offers" class="nav-link">বিশেষ অফার</a>
+              <a href="index.html#products-section" class="nav-link">পণ্যসমূহ</a>
+              <a href="index.html#offers-section" class="nav-link">বিশেষ অফার</a>
               <a href="reviews.html" class="nav-link">রিভিউ</a>
-              <a href="partners.html" class="nav-link">পার্টনার</a>
-              <a href="about.html" class="nav-link">আমাদের সম্পর্কে</a>
               <a href="contact.html" class="nav-link">যোগাযোগ</a>
             </nav>
             <button id="cart-btn" class="relative p-2 rounded-full hover:bg-accent hover:text-primary transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-              <span id="cart-item-count" class="absolute -top-1 -right-1 bg-secondary text-secondary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+              <span id="cart-item-count" class="absolute -top-1 -right-1 bg-secondary text-secondary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden" style="animation: scale-in 0.3s ease-out;">0</span>
             </button>
             <button id="theme-toggle-btn" class="p-2 rounded-full hover:bg-accent hover:text-primary transition-colors">
               <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
               <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md hover:bg-accent transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
           </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden py-4 border-t border-border">
+          <div class="px-4 mb-4">
+            <div class="relative">
+              <input type="search" id="mobile-search-bar" placeholder="পণ্য খুঁজুন..." class="w-full pl-10 pr-4 py-2 border rounded-full bg-input text-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+          </div>
+          <nav class="flex flex-col items-start gap-3 px-4">
+            <a href="index.html" class="nav-link w-full">হোম</a>
+            <a href="index.html#products-section" class="nav-link w-full">পণ্যসমূহ</a>
+            <a href="index.html#offers-section" class="nav-link w-full">বিশেষ অফার</a>
+            <a href="reviews.html" class="nav-link w-full">রিভিউ</a>
+            <a href="contact.html" class="nav-link w-full">যোগাযোগ</a>
+          </nav>
         </div>
       </div>
     </header>
@@ -85,10 +115,44 @@
       </div>
     </main>
 
-    <footer class="bg-card/95 backdrop-blur-md py-8 border-t border-border mt-16">
-        <div class="container mx-auto px-4 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 সবকিছু.com. সকল অধিকার সংরক্ষিত।</p>
+    <footer class="main-footer bg-card/95">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">আমাদের সম্পর্কে</h4>
+            <p class="text-muted-foreground text-sm">
+              সবকিছু.com আপনাকে সেরা অনলাইন শপিংয়ের অভিজ্ঞতা দিতে প্রতিশ্রুতিবদ্ধ।
+            </p>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">গুরুত্বপূর্ণ লিংক</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="index.html" class="footer-link">হোম</a></li>
+              <li><a href="index.html#products-section" class="footer-link">পণ্যসমূহ</a></li>
+              <li><a href="about.html" class="footer-link">আমাদের সম্পর্কে</a></li>
+              <li><a href="contact.html" class="footer-link">যোগাযোগ</a></li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">যোগাযোগ</h4>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3"><span class="text-primary">📧</span><a href="mailto:shobkichuofficial@gmail.com" class="footer-link">shobkichuofficial@gmail.com</a></div>
+              <div class="flex items-center gap-3"><span class="text-primary">📍</span><span class="text-muted-foreground">বাংলাদেশ</span></div>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground">সোশ্যাল মিডিয়া</h4>
+            <div class="flex items-center gap-4">
+              <a href="https://www.facebook.com/share/16sSjnvbCa/" target="_blank" class="social-icon">F</a>
+              <a href="https://www.instagram.com/shobkichuofficial/" target="_blank" class="social-icon">I</a>
+              <a href="#" target="_blank" class="social-icon">Y</a>
+            </div>
+          </div>
         </div>
+        <div class="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <p>&copy; 2024 সবকিছু.com. সকল অধিকার সংরক্ষিত।</p>
+        </div>
+      </div>
     </footer>
   </div>
 

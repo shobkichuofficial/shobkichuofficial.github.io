@@ -78,7 +78,19 @@ body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); 
 
 
 /* Buttons */
-.btn-primary { background-image: var(--gradient-primary); color: hsl(var(--primary-foreground)); box-shadow: var(--shadow-elegant); transition: all 0.3s; }
+.btn-primary { 
+  background-image: var(--gradient-primary); 
+  color: hsl(var(--primary-foreground)); 
+  box-shadow: var(--shadow-elegant); 
+  transition: all 0.3s; 
+  position: relative; 
+  overflow: hidden; 
+  /* Added for spinner/animation alignment */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
 .btn-primary:hover:not(:disabled) { box-shadow: var(--shadow-glow); transform: scale(1.05); }
 .btn-ghost { background-color: hsla(var(--card) / 0.5); backdrop-filter: blur(4px); border: 1px solid hsl(var(--border)); color: hsl(var(--card-foreground)); transition: all 0.3s; }
 .btn-ghost:hover { background-color: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
@@ -89,6 +101,11 @@ button:disabled { opacity: 0.7; cursor: not-allowed; }
 .card-modern:hover { box-shadow: var(--shadow-glow); transform: translateY(-5px); }
 
 /* Header & Navigation */
+#main-header {
+  /* Laggy Scroll Fix: Remove backdrop-filter and make fully opaque */
+  backdrop-filter: none !important;
+  background-color: hsl(var(--card)) !important;
+}
 .nav-link { font-weight: 500; color: hsl(var(--muted-foreground)); transition: color 0.3s; position: relative; padding-bottom: 4px; }
 .nav-link:hover { color: hsl(var(--primary)); }
 .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-image: var(--gradient-primary); transition: width 0.3s ease-out; }
@@ -109,10 +126,37 @@ button:disabled { opacity: 0.7; cursor: not-allowed; }
 /* Contact & Footer */
 .social-link { background-color: hsl(var(--accent)); color: hsl(var(--accent-foreground)); padding: 0.5rem 1.5rem; border-radius: 999px; font-weight: 500; transition: all 0.3s ease; }
 .social-link:hover { background-image: var(--gradient-primary); color: hsl(var(--primary-foreground)); box-shadow: var(--shadow-glow); }
-.footer-link { color: hsl(var(--muted-foreground)); transition: color 0.3s ease; }
+
+/* --- Standardized Footer --- */
+.main-footer {
+  background-color: hsla(var(--card) / 0.95);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border-top: 1px solid hsl(var(--border));
+  margin-top: 4rem;
+}
+.footer-link {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.3s ease;
+  font-size: 0.875rem; /* 14px */
+}
 .footer-link:hover { color: hsl(var(--primary)); }
-.social-icon { width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background-color: hsl(var(--accent)); color: hsl(var(--accent-foreground)); font-weight: bold; transition: all 0.3s ease; }
-.social-icon:hover { background-image: var(--gradient-primary); color: hsl(var(--primary-foreground)); transform: scale(1.1); }
+.social-icon {
+  width: 2.5rem; height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.social-icon:hover {
+  background-image: var(--gradient-primary);
+  color: hsl(var(--primary-foreground));
+  transform: scale(1.1);
+}
 
 /* Modals & Toast */
 .modal-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.3s; padding: 1rem; }
@@ -136,4 +180,133 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .dark input[type="search"]::-webkit-search-cancel-button {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a1a1aa'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+}
+
+/* --- NEW PRELOADER --- */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+#preloader {
+  position: fixed;
+  inset: 0;
+  background-color: hsl(var(--background));
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease-out 0.5s, visibility 0.5s ease-out 0.5s; /* Fade out after 0.5s */
+  opacity: 1;
+  visibility: visible;
+}
+#preloader img {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+body.page-loaded #preloader {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* --- NEW TAB STYLES --- */
+.tab-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding: 0.5rem;
+  background-color: hsl(var(--muted));
+  border-radius: 999px;
+  max-width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab-button.active {
+  color: hsl(var(--primary-foreground));
+  background-image: var(--gradient-primary);
+  box-shadow: var(--shadow-elegant);
+}
+.tab-content {
+  display: none; /* Hidden by default */
+  animation: fade-in 0.5s ease-out; /* Use existing fade-in */
+}
+.tab-content.active {
+  display: block; /* Shown by JS */
+}
+
+/* --- NEW PROFESSIONAL CHECKOUT BUTTON ANIMATION --- */
+.btn-primary .btn-text {
+  transition: opacity 0.2s ease-out;
+}
+.btn-primary.loading .btn-text {
+  opacity: 0; /* Hide text */
+  max-width: 0; /* Prevent text from taking space */
+  overflow: hidden;
+}
+
+/* Keyframes for truck driving */
+@keyframes drive-across {
+  0% { transform: translateX(-80px); } /* Start off-screen left */
+  100% { transform: translateX(250px); } /* End off-screen right */
+}
+
+/* Keyframes for road lines moving */
+@keyframes move-lines {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-40px); } /* Move lines to the left */
+}
+
+.truck-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+  overflow: hidden; /* Important */
+}
+
+.btn-primary.loading .truck-animation {
+  opacity: 1; /* Show animation */
+}
+
+/* The SVG truck */
+.truck-animation .truck-svg {
+  width: 45px; /* Truck size */
+  height: 45px;
+  fill: hsl(var(--primary-foreground)); /* Truck color */
+  position: absolute;
+  /* Animation */
+  transform: translateX(-80px); /* Start position */
+  animation: drive-across 2s linear infinite;
+  animation-delay: 0.2s; /* Small delay */
+}
+
+/* The road lines */
+.truck-animation .road-lines {
+  position: absolute;
+  bottom: 12px; /* Position road below truck */
+  left: 0;
+  width: 200%; /* Make road wider than button */
+  height: 2px;
+  background-image: linear-gradient(to right, hsl(var(--primary-foreground) / 0.5) 20px, transparent 20px);
+  background-size: 40px 2px;
+  /* Animation */
+  animation: move-lines 0.4s linear infinite;
 }
