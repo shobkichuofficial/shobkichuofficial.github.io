@@ -620,8 +620,8 @@ function initializeProductPage() {
                       <div>
                           <h1 class="text-3xl lg:text-4xl font-bold text-foreground mb-3">${product.name}</h1>
                           <div class="flex items-center gap-4 mb-4">
-                              <span class="bg-gradient-secondary text-secondary-foreground font-bold text-2xl px-4 py-2 rounded-md">৳${product.price}</span>
-                              <span class="text-lg text-muted-foreground line-through">৳${Math.round(product.price * 1.2)}</span>
+                              <span class="bg-gradient-secondary text-secondary-foreground font-bold text-2xl px-4 py-2 rounded-md">৳${p.price}</span>
+                              <span class="text-lg text-muted-foreground line-through">৳${Math.round(p.price * 1.2)}</span>
                           </div>
                       </div>
                       <div> <h3 class="text-xl font-semibold text-foreground mb-2">বিবরণ</h3> <p class="text-muted-foreground leading-relaxed">${product.description}</p> </div>
@@ -802,7 +802,7 @@ function initializeCheckoutPage() {
 
             // Start loading animation
             submitBtn.disabled = true;
-            submitBtn.classList.add('loading'); // This will show the spinner
+            submitBtn.classList.add('loading'); // This will show the animation
             if (btnText) btnText.textContent = 'প্রসেসিং...'; // Change text
             
             const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -897,26 +897,39 @@ function initializeThankYouPage() {
 }
 
 
-// --- Preloader Logic (NEW & SIMPLIFIED) ---
+// --- Preloader Logic (UPDATED with 2s Timeout) ---
 function initializePreloader() {
     const preloader = document.getElementById('preloader');
     
     if (!preloader) {
-        // If no preloader exists, just show the page
         document.body.classList.add('page-loaded');
         return;
     }
 
-    // Wait for all content (images, etc.) to load
-    window.onload = () => {
-        // Add class to fade out preloader
+    let preloaderFinished = false;
+
+    // Function to hide the preloader
+    function hidePreloader() {
+        if (preloaderFinished) return; // Ensure it only runs once
+        preloaderFinished = true;
+
         document.body.classList.add('page-loaded');
         
         // Remove preloader from DOM after animations finish (1s)
         setTimeout(() => {
             if (preloader) preloader.remove();
         }, 1000); 
+    }
+
+    // 1. Wait for all content (images, etc.) to load
+    window.onload = () => {
+        hidePreloader();
     };
+
+    // 2. Set a maximum timeout of 2 seconds
+    setTimeout(() => {
+        hidePreloader();
+    }, 2000); // 2000 milliseconds = 2 seconds
 }
 
 
